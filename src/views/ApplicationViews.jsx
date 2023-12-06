@@ -3,6 +3,7 @@ import { Login } from "../components/auth/Login";
 import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
 import { CollectiblesList } from "../components/collectibles/CollectiblesList";
+import { CollectibleDetails } from "../components/collectibles/CollectibleDetails";
 
 export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) => {
 
@@ -13,6 +14,7 @@ export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) 
       <Route path="/register" element={<Register setToken={setToken} setCurrentUserId={setCurrentUserId} />} />
       <Route path="/" element={<Authorized token={token} userId={userId} />}>
         <Route index element={<CollectiblesList /> } />
+        <Route path=":itemId" element={<CollectibleDetails /> } />
       </Route>
     </Routes>
   );
