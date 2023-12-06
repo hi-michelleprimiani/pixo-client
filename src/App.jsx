@@ -1,40 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
+import { useState } from "react";
+import { ApplicationViews } from "./views/ApplicationViews";
+import { BrowserRouter } from "react-router-dom";
+//! Import NavBar !! import { NavBar } from "./components/nav/NavBar";
+//! Invoke right about appviews on line 29
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [token, setTokenState] = useState(localStorage.getItem("auth_token"));
+  const [userId, setUserId] = useState(localStorage.getItem("user_id"));
+
+  const setToken = (newToken) => {
+    localStorage.setItem("auth_token", newToken);
+    setTokenState(newToken);
+  };
+  const setCurrentUserId = (newUserId) => {
+    localStorage.setItem("user_id", newUserId);
+    setUserId(newUserId);
+  };
 
   return (
-    <>
-    <Theme>
-
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </Theme>
-    </>
-  )
+    <BrowserRouter>
+      <ApplicationViews
+        token={token}
+        setToken={setToken}
+        userId={userId}
+        setCurrentUserId={setCurrentUserId}
+      />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
