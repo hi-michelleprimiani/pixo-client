@@ -4,21 +4,21 @@ export const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <NavLink
               to="/"
-              className="flex-shrink-0 flex items-center text-blue-600 hover:text-purple-700"
+              className="flex-shrink-0 flex items-center text-green-600 hover:text-black"
             >
-              <span className="ml-2 text-xl font-bold">Pixo</span>
+              <span className="ml-2 text-2xl font-bold">Pixo</span>
             </NavLink>
           </div>
-          <div className="hidden sm:ml-6 sm:flex">
+          <div className="flex-shrink-0 flex items-center text-green-600 hover:text-black">
             <NavLink
               to="/profile"
-              className="text-left px-3 py-2 rounded-md text-sm font-medium text-blue-600 hover:text-purple-700"
+              className="ml-2 text-2xl font-bold"
             >
               Profile
             </NavLink>
