@@ -18,7 +18,7 @@ export const CollectiblesList = () => {
   }, []);
 
   return (
-    <Grid columns="4" gap="3" width="auto">
+    <Grid columns="4" gap="4" width="auto">
       {collectibles.map((collectible) => (
         <Card key={collectible.id}
         onClick={() => {

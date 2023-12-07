@@ -14,7 +14,6 @@ export const CollectibleDetails = () => {
 
   return (
     <Container className="lg (1024px)">
-
     <Box size={2} className="flex justify-between">
       {/* Left Column for Images */}
       <Box className="flex flex-col items-center" style={{ width: '60%' }}>
@@ -39,7 +38,8 @@ export const CollectibleDetails = () => {
       <Box className="flex flex-col" style={{ width: '40%' }}>
         {/* Description and other text-based details */}
         <div className="mb-4">
-          <h1 className="text-2xl font-bold">{chosenCollectible.name}</h1>
+          <h1 className="text-2xl font-bold mb-4">{chosenCollectible.name}</h1>
+          <div className="text-3xl font-bold mb-4">${chosenCollectible.price}</div>
           <p>{chosenCollectible.description}</p>
         </div>
         {/* User information and actions */}
@@ -52,11 +52,12 @@ export const CollectibleDetails = () => {
             <p>{chosenCollectible.seller?.user.first_name} {chosenCollectible.seller?.user.last_name} - User Rating</p>
           </div>
         </div>
-        <Button className="btn-primary">Add To Cart</Button>
-        <Button className="btn-secondary">Add To Favorites</Button>
+        <Button className="">Add To Cart</Button>
+        <Button className="">Add To Favorites</Button>
         <div>
-          <p>Material: {chosenCollectible.material}</p>
-          <p>Size: {chosenCollectible.size}</p>
+          <p className="mb-2">Material: {chosenCollectible.material}</p>
+          <p className="mb-2">Size: {chosenCollectible.size}</p>
+          <p>Color: {chosenCollectible.color}</p>
         </div>
       </Box>
     </Box>
