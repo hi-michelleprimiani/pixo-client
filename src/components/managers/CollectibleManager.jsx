@@ -18,3 +18,15 @@ export const getAllCollectibles = () => {
     return await response.json();
   };
   
+
+  export const createNewPost = async (newItem) => {
+    const response = await fetch('http://localhost:8000/collectibles', {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    });
+    return response;
+  };
