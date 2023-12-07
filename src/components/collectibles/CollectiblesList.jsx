@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllCollectibles } from "../managers/CollectibleManager";
-import { Grid, Card, Inset, AspectRatio } from '@radix-ui/themes';
+import { Grid, Card, Inset, AspectRatio, Container } from '@radix-ui/themes';
 import { useNavigate } from "react-router-dom";
 
 export const CollectiblesList = () => {
@@ -18,12 +18,13 @@ export const CollectiblesList = () => {
   }, []);
 
   return (
+    <Container className="lg (1024px)">
     <Grid columns="4" gap="4" width="auto">
       {collectibles.map((collectible) => (
-        <Card key={collectible.id}
-        onClick={() => {
-            navigate(`/${collectible.id}`);
-          }}>
+          <Card key={collectible.id}
+          onClick={() => {
+              navigate(`/item/${collectible.id}`);
+            }}>
         <Inset clip="padding-box" side="top" pb="current">
         <AspectRatio ratio={2 / 2}>
         {collectible.images.length > 0 && (
@@ -36,7 +37,7 @@ export const CollectiblesList = () => {
                 width: '100%',
                 height: '100%',
                 backgroundColor: 'var(--gray-5)',
-              }}
+            }}
             />
             )}
             </AspectRatio>
@@ -46,5 +47,6 @@ export const CollectiblesList = () => {
         </Card>
       ))}
     </Grid>
+      </Container>
   );
 };
