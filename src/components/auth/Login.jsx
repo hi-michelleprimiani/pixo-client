@@ -62,7 +62,7 @@ export const Login = ({ setToken, setCurrentUserId }) => {
           )}
 
           <div className="mb-4 mt-6">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full w-full">
+            <button className="bg-green hover:bg-black text-white py-2 px-4 rounded-full w-full">
               Login
             </button>
           </div>
@@ -70,7 +70,7 @@ export const Login = ({ setToken, setCurrentUserId }) => {
 
         <div className="text-center">
           <Link
-            className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            className="text-black hover:text-green visited:text-black"
             to="/register"
           >
             Create an Account

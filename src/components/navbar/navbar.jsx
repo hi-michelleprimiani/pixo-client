@@ -19,7 +19,7 @@ export const NavBar = ( {userId, setToken }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
-            <NavLink to="/" className="flex-shrink-0 flex items-center text-green-600 hover:text-black">
+            <NavLink to="/" className="flex-shrink-0 flex items-center text-black hover:text-green">
               <span className="ml-2 text-2xl font-bold">Pixo</span>
             </NavLink>
           </div>

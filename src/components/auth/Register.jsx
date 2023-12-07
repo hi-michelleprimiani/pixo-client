@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../managers/AuthManager";
+import { Button } from "@radix-ui/themes";
 
 export const Register = ({ setToken, setCurrentUserId }) => {
   const [formData, setFormData] = useState({
@@ -175,15 +176,16 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           </div>
 
           <div className="mb-4">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full w-full">
+            <Button className="w-full">
               Get Started
-            </button>
-            <button
-                className="bg-white my-5 text-black py-2 px-4 rounded-full w-full border border-black"
+            </Button>
+            <Button
+                className="w-full"
+                variant="outline"
                 onClick={() => navigate("/login")}
                 >
                 Back to Login
-            </button>
+            </Button>
           </div>
         </form>
       </section>

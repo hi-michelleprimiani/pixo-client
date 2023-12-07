@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCollectibleById } from "../managers/CollectibleManager";
 import { useParams } from "react-router-dom";
-import { Avatar, Button, Box, Container } from '@radix-ui/themes';
+import { Avatar, Button, Box, Container, Tabs, Text } from '@radix-ui/themes';
 import { HeartFilledIcon, AvatarIcon } from '@radix-ui/react-icons'
 
 
@@ -34,15 +34,12 @@ export const CollectibleDetails = () => {
                 ))
                 )}
       </Box>
-      {/* Right Column for Details */}
       <Box className="flex flex-col" style={{ width: '40%' }}>
-        {/* Description and other text-based details */}
         <div className="mb-4">
           <h1 className="text-4xl font-bold mb-4">{chosenCollectible.name}</h1>
           <div className="text-3xl font-bold mb-4">${chosenCollectible.price}</div>
           <p>{chosenCollectible.description}</p>
         </div>
-        {/* User information and actions */}
         <div className="flex items-center mb-4">
           <Avatar
             fallback={chosenCollectible.seller?.user.first_name}
@@ -62,9 +59,26 @@ export const CollectibleDetails = () => {
         </div>
         </div>
         <div>
-          <p className="mb-2">Material: {chosenCollectible.material}</p>
-          <p className="mb-2">Size: {chosenCollectible.size}</p>
-          <p>Color: {chosenCollectible.color}</p>
+        <Tabs.Root defaultValue="materials">
+          <Tabs.List>
+            <Tabs.Trigger value="materials">Materials</Tabs.Trigger>
+            <Tabs.Trigger value="size">Size</Tabs.Trigger>
+            <Tabs.Trigger value="color">Color</Tabs.Trigger>
+          </Tabs.List>
+          <Box px="4" pt="3" pb="2">
+            <Tabs.Content value="materials">
+              <Text size="3">{chosenCollectible.material}</Text>
+            </Tabs.Content>
+
+            <Tabs.Content value="size">
+              <Text size="3">{chosenCollectible.size}</Text>
+            </Tabs.Content>
+
+            <Tabs.Content value="color">
+              <Text size="3">{chosenCollectible.color}</Text>
+            </Tabs.Content>
+          </Box>
+        </Tabs.Root>
         </div>
       </Box>
     </Box>

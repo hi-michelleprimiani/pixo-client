@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <html>
       <body>
-        <Theme accentColor="green" radius="full">
+       <Theme appearance="light" accentColor="jade" radius="full">
           <App />
         </Theme>
       </body>
