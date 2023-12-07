@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 export const CreateCollectibleForm = () => {
     const initItemState = {
+        
         name: "",
         description: "",
         price: "",
@@ -14,18 +15,17 @@ export const CreateCollectibleForm = () => {
         color: "",
         size: ""
     }
-    const initImageState1 = {
-        img_url: ""
-    }
-    const initImageState2 = {
-        img_url: ""
-    }
-    const initImageState3 = {
-        img_url: ""
-    }
+    const initImageState1 = ""
+    const initImageState2 = ""
+    const initImageState3 = ""
     const [image1, updateImage1] = useState(initImageState1)
     const [image2, updateImage2] = useState(initImageState2)
     const [image3, updateImage3] = useState(initImageState3)
+    const imagesArray = [
+        image1,
+        image2,
+        image3
+    ];
     const [item, updateItem] = useState(initItemState)
     const [chosenCategories, updateChosen] = useState(new Set())
     const [categories, changeCategories] = useState([{ id: 1, name: "Art & Collectibles"}, {id: 2, name: "Home & Living"}])
@@ -41,6 +41,11 @@ export const CreateCollectibleForm = () => {
         changeCategories(categories)
       };
 
+      const imagesObjectsArray = imagesArray.map(imageUrl => {
+        return { img_url: imageUrl };
+    });
+    
+
     const postCollectible = async (evt) => {
         evt.preventDefault()
         await fetch(`http://localhost:8000/collectibles`, {
@@ -49,7 +54,7 @@ export const CreateCollectibleForm = () => {
                 "Authorization": `Token ${localStorage.getItem("auth_token")}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({...item, images: image1, image2, image3, categories: Array.from(chosenCategories)})
+            body: JSON.stringify({...item, images: imagesObjectsArray, categories: Array.from(chosenCategories)})
         })
         await getAllCollectibles()
         navigate("/")
@@ -65,9 +70,9 @@ export const CreateCollectibleForm = () => {
         updateChosen(copy)
     }
 
-    const handleImageInput1 = (e) => updateImage1({ img_url: e.target.value });
-    const handleImageInput2 = (e) => updateImage2({ img_url: e.target.value });
-    const handleImageInput3 = (e) => updateImage3({ img_url: e.target.value });
+    const handleImageInput1 = (e) => updateImage1(e.target.value);
+    const handleImageInput2 = (e) => updateImage2(e.target.value);
+    const handleImageInput3 = (e) => updateImage3(e.target.value);
     
 
     const handleUserInput = (e) => updateItem({ ...item, [e.target.id]: e.target.value })
@@ -113,7 +118,7 @@ export const CreateCollectibleForm = () => {
                             id="image1"
                             type="text"
                             className="form-control"
-                            onChange={(e) => handleImageInput1(e, 0)}
+                            onChange={(e) => handleImageInput1(e)}
                         />
                         </fieldset>
                         <fieldset>
@@ -122,7 +127,7 @@ export const CreateCollectibleForm = () => {
                             id="image2"
                             type="text"
                             className="form-control"
-                            onChange={(e) => handleImageInput2(e, 1)}
+                            onChange={(e) => handleImageInput2(e)}
                         />
                         </fieldset>
                         <fieldset>
@@ -131,7 +136,7 @@ export const CreateCollectibleForm = () => {
                             id="image3"
                             type="text"
                             className="form-control"
-                            onChange={(e) => handleImageInput3(e, 2)}
+                            onChange={(e) => handleImageInput3(e)}
                         />
                         </fieldset>
 
