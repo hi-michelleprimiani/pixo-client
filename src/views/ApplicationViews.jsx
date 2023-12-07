@@ -14,7 +14,7 @@ export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) 
     <Routes>
       <Route path="/login" element={<Login setToken={setToken} setCurrentUserId={setCurrentUserId} />} />
       <Route path="/register" element={<Register setToken={setToken} setCurrentUserId={setCurrentUserId} />} />
-      <Route path="/" element={<Authorized token={token} userId={userId} />}>
+      <Route path="/" element={<Authorized token={token} setToken={setToken} userId={userId} />}>
         <Route index element={<CollectiblesList /> } />
         <Route path="/item/:itemId" element={<CollectibleDetails /> } />
         <Route path="/profile" element={<ProfileView /> } />

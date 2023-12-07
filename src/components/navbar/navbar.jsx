@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getPixoUserById } from "../managers/PixoUserManager";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
 
-export const NavBar = ( {userId}) => {
+export const NavBar = ( {userId, setToken }) => {
   const [pixoUser, setPixoUser] = useState([])
   const navigate = useNavigate();
 
@@ -44,12 +44,15 @@ export const NavBar = ( {userId}) => {
                   className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                   onSelect={() => console.log('Create New Post clicked')}
                   >
-                  Create New Item
+                  Post New Item
                 </DropdownMenuItem>
                   </NavLink>
                 <DropdownMenuItem
                   className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  onSelect={() => console.log('Logout clicked')}
+                  onClick={() => {
+                    setToken("");
+                    navigate("/login");
+                  }}
                 >
                   Logout
                 </DropdownMenuItem>
