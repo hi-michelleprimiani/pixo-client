@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import { getAllCollectiblesAndUser } from "../managers/CollectibleManager"
 import { getPixoUserById } from "../managers/PixoUserManager"
-import { Avatar, Box, Card, Container, Flex, Grid, Inset, Text } from "@radix-ui/themes"
+import { AlertDialog, AspectRatio, Avatar, Box, Button, Card, Container, Flex, Grid, Inset, Popover, Text, TextArea } from "@radix-ui/themes"
+import { useNavigate } from "react-router-dom"
 
 
 
 export const ProfileView = ( {userId}) => {
     const [getUser, setUser] = useState([])
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         getPixoUserById(userId).then(setUser)
@@ -15,9 +15,10 @@ export const ProfileView = ( {userId}) => {
 
 
     return (<>
-    <Container className="lg (1024px)">
-        <Box size={2} className="flex">
-        <Card style={{ maxWidth: 600 }}>
+    
+    <Container>
+        <div className="flex justify-center items-center h-full">
+        <Card className="flex mb-20" style={{ maxWidth: 800 }}>
         <Flex gap="3" align="center">
             <Avatar
             size="8"
@@ -37,25 +38,93 @@ export const ProfileView = ( {userId}) => {
             </Text>
             </Box>
         </Flex>
-        </Card>
-        </Box>
 
-        <Grid columns={4} gap={4} width="auto">
+        <div className="edit button">
+            <Popover.Root>
+                <Popover.Trigger>
+                    <Button variant="soft" className="float-right">
+                    Edit Profile
+                    </Button>
+                </Popover.Trigger>
+                <Popover.Content style={{ width: 360 }}>
+                    <Flex gap="3">
+                    <Box grow="1">
+                        <Text>
+                            Edit Profile
+                        </Text>
+                        <TextArea placeholder="Write a comment…" style={{ height: 80 }} />
+                        <Flex gap="3" mt="3" justify="between">
+                        <Flex align="center" gap="2" asChild>
+                        </Flex>
+                        <Popover.Close>
+                            <Button size="1">Update Profile</Button>
+                        </Popover.Close>
+                        </Flex>
+                    </Box>
+                    </Flex>
+                </Popover.Content>
+            </Popover.Root>
+        </div>
+        </Card>
+            </div>
+
+
+        <div className="text-xl font-bold mb-3">Current Listed Items </div>
+        <Grid columns="4" gap="4" width="auto">
         {getUser.collectible?.map((item) => (
-            <Card key={item.id}>  
-            <Inset clip="padding-box" side="top" pb="current">
-            <div key={item.id}> 
-                    <img
-                    src={item.collectible?.images[0].img_url}
-                    alt={item.name}/>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p>${item.price}</p>
-                </div>
-            </Inset>
+            <Card key={item.id}
+            className="cursor-pointer hover:shadow-lg transition-shadow" >
+                <Inset clip="padding-box" side="top" pb="current">
+                    <AspectRatio ratio={1 / 1}>
+                    {item.images.length > 0 && (
+                        <img 
+                        src={item.images[0].img_url} 
+                        onClick={() => navigate(`/item/${item.id}`)}
+                        alt={item.name}
+                        style={{
+                            display: 'block',
+                            objectFit: 'cover',
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'var(--gray-5)',
+                        }}
+                        />
+                        )}
+                    </AspectRatio>
+                </Inset>
+                    <div className="text-xl font-bold">{item.name}</div>
+                    <p className="text-gray-600">${item.price}</p>
+                    <div className="mt-2">
+                    <Button className="" variant="soft">Edit</Button>
+                    <AlertDialog.Root>
+                        <AlertDialog.Trigger>
+                            <Button className="float-right" color="red">Delete</Button>
+                        </AlertDialog.Trigger>
+                        <AlertDialog.Content style={{ maxWidth: 450 }}>
+                            <AlertDialog.Title>Delete Item</AlertDialog.Title>
+                            <AlertDialog.Description size="2">
+                            Are you sure? This item will be deleted.
+                            </AlertDialog.Description>
+
+                            <Flex gap="3" mt="4" justify="end">
+                            <AlertDialog.Cancel>
+                                <Button variant="soft" color="gray">
+                                Cancel
+                                </Button>
+                            </AlertDialog.Cancel>
+                            <AlertDialog.Action>
+                                <Button variant="solid" color="red">
+                               Delete
+                                </Button>
+                            </AlertDialog.Action>
+                            </Flex>
+                        </AlertDialog.Content>
+                        </AlertDialog.Root>
+                    </div>
             </Card>
-            ))}
-            </Grid>
+        ))}
+        </Grid>
+
     </Container>
         </>)
 }

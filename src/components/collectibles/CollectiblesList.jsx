@@ -22,6 +22,7 @@ export const CollectiblesList = () => {
     <Grid columns="4" gap="4" width="auto">
       {collectibles.map((collectible) => (
           <Card key={collectible.id}
+          className="cursor-pointer hover:shadow-lg transition-shadow" 
           onClick={() => {
               navigate(`/item/${collectible.id}`);
             }}>
