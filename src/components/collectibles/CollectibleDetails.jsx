@@ -15,7 +15,7 @@ export const CollectibleDetails = () => {
 
   return (
     <Container className="lg (1024px)">
-    <Box size={2} className="flex justify-between">
+    <Box size={2} className="flex justify-between mb-28">
       <Box className="flex flex-col items-center" style={{ width: '60%' }}>
         {chosenCollectible.images && chosenCollectible.images.length > 0 && (
             chosenCollectible.images.map((image) => (
@@ -38,7 +38,8 @@ export const CollectibleDetails = () => {
         <div className="mb-4">
           <h1 className="text-4xl font-bold mb-4">{chosenCollectible.name}</h1>
           <div className="text-3xl font-bold mb-4">${chosenCollectible.price}</div>
-          <p>{chosenCollectible.description}</p>
+          <div className="whitespace-pre-wrap">{chosenCollectible.description}</div>
+
         </div>
         <div className="flex items-center mb-4">
           <Avatar

@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom"
 
 export const CreateCollectibleForm = () => {
     const initItemState = {
-        name: "Natural Moss & Stick Birdhouse",
-        description: "Moss and Stick Natural Birdhouse  Birdies will love you for their newly decorated home  Blends well into your landscape - Magical fairy garden-like  Teardrop shape  Moss bottom with branching accent top",
-        price: "59.00",
-        material: "Wood",
-        color: "Brown, Green",
-        size: "2.5/3 feet"
+        name: "",
+        description: "",
+        price: "",
+        material: "",
+        color: "",
+        size: ""
     }
     const initImageState1 = ""
     const initImageState2 = ""
@@ -40,10 +40,11 @@ export const CreateCollectibleForm = () => {
         changeCategories(categories)
       };
 
-      const imagesObjectsArray = imagesArray.map(imageUrl => {
+      const imagesObjectsArray = imagesArray
+      .filter(imageUrl => imageUrl !== "")
+      .map(imageUrl => {
         return { img_url: imageUrl };
     });
-    
 
     const postCollectible = async (evt) => {
         evt.preventDefault()

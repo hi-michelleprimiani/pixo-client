@@ -34,7 +34,6 @@ export const NavBar = ( {userId, setToken }) => {
                 <NavLink to="/profile">
                 <DropdownMenuItem
                   className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  onSelect={() => console.log('Profile clicked')}
                   >
                   Profile
                 </DropdownMenuItem>
@@ -42,7 +41,6 @@ export const NavBar = ( {userId, setToken }) => {
                   <NavLink to="/create">
                 <DropdownMenuItem
                   className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  onSelect={() => console.log('Create New Post clicked')}
                   >
                   Post New Item
                 </DropdownMenuItem>
