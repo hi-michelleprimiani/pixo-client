@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllCollectibles } from "../managers/CollectibleManager"
+import { getAllCollectiblesAndUser } from "../managers/CollectibleManager"
 import { Box, Button, Checkbox, Container, Flex, TextArea } from "@radix-ui/themes"
 import { useNavigate } from "react-router-dom"
 
@@ -55,7 +55,7 @@ export const CreateCollectibleForm = () => {
             },
             body: JSON.stringify({...item, images: imagesObjectsArray, categories: Array.from(chosenCategories)})
         })
-        await getAllCollectibles()
+        await getAllCollectiblesAndUser()
         navigate("/")
     }
 
@@ -110,6 +110,7 @@ export const CreateCollectibleForm = () => {
                                     id="price"
                                     autoComplete="off"
                                     type="text"
+                                    placeholder="Please enter a valid price (e.g., 120.00 or 10.00)"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     onChange={(e) => handleUserInput(e, "price")}
                                 />

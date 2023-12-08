@@ -1,6 +1,6 @@
 
 
-export const getAllCollectibles = () => {
+export const getAllCollectiblesAndUser = () => {
     return fetch("http://localhost:8000/collectibles", {
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_token")}`,

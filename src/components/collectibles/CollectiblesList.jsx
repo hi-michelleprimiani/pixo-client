@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllCollectibles } from "../managers/CollectibleManager";
+import { getAllCollectiblesAndUser } from "../managers/CollectibleManager";
 import { Grid, Card, Inset, AspectRatio, Container } from '@radix-ui/themes';
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ export const CollectiblesList = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    getAllCollectibles()
+    getAllCollectiblesAndUser()
       .then((data) => {
         setCollectibles(data);
       })

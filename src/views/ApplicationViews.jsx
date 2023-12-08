@@ -17,7 +17,7 @@ export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) 
       <Route path="/" element={<Authorized token={token} setToken={setToken} userId={userId} />}>
         <Route index element={<CollectiblesList /> } />
         <Route path="/item/:itemId" element={<CollectibleDetails /> } />
-        <Route path="/profile" element={<ProfileView /> } />
+        <Route path="/profile" element={<ProfileView userId={userId}/> } />
         <Route path="/create" element={<CreateCollectibleForm /> } />
       </Route>
     </Routes>
