@@ -88,6 +88,7 @@ export const CreateCollectibleForm = () => {
                                 <label htmlFor="name" className="block text-lg font-bold text-gray-700 leading-tight">Name</label>
                                 <input
                                     id="name"
+                                    autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     onChange={(e) => handleUserInput(e, "name")}
@@ -97,6 +98,7 @@ export const CreateCollectibleForm = () => {
                                 <label htmlFor="description" className="block text-lg font-bold text-gray-700 leading-tight">Description</label>
                                 <textarea
                                     id="description"
+                                    autoComplete="off"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     rows="4"
                                     onChange={(e) => handleUserInput(e, "description")}
@@ -106,6 +108,7 @@ export const CreateCollectibleForm = () => {
                                 <label htmlFor="price" className="block text-lg font-bold text-gray-700 leading-tight">Price</label>
                                 <input
                                     id="price"
+                                    autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     onChange={(e) => handleUserInput(e, "price")}
@@ -115,6 +118,7 @@ export const CreateCollectibleForm = () => {
                                 <label htmlFor="material" className="block text-lg font-bold text-gray-700 leading-tight">Material</label>
                                 <input
                                     id="material"
+                                    autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     onChange={(e) => handleUserInput(e, "material")}
@@ -124,6 +128,7 @@ export const CreateCollectibleForm = () => {
                                 <label htmlFor="color" className="block text-lg font-bold text-gray-700 leading-tight">Color</label>
                                 <input
                                     id="color"
+                                    autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     onChange={(e) => handleUserInput(e, "color")}
@@ -133,6 +138,7 @@ export const CreateCollectibleForm = () => {
                                 <label htmlFor="size" className="block text-lg font-bold text-gray-700 leading-tight">Size</label>
                                 <input
                                     id="size"
+                                    autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     onChange={(e) => handleUserInput(e, "size")}
