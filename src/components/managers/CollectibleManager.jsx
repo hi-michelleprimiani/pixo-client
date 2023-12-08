@@ -30,3 +30,15 @@ export const getAllCollectiblesAndUser = () => {
     });
     return response;
   };
+
+  export const deleteCollectible = async (itemId) => {
+    const response = await fetch(`http://localhost:8000/collectibles/${itemId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  };
+  

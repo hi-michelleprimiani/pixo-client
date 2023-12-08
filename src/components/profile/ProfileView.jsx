@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getPixoUserById } from "../managers/PixoUserManager"
 import { AlertDialog, AspectRatio, Avatar, Box, Button, Card, Container, Flex, Grid, Inset, Popover, Text, TextArea } from "@radix-ui/themes"
 import { useNavigate } from "react-router-dom"
+import { deleteCollectible } from "../managers/CollectibleManager"
 
 
 
@@ -12,6 +13,21 @@ export const ProfileView = ( {userId}) => {
     useEffect(() => {
         getPixoUserById(userId).then(setUser)
     }, [userId])
+
+
+
+    const handleDeleteCollectible = async (itemId) => {
+        try {
+          const response = await deleteCollectible(itemId);
+          
+        } catch (error) {
+          console.error("An error occurred while deleting the item:", error);
+        }
+        setUser((prevUser) => ({
+            ...prevUser,
+            collectible: prevUser.collectible.filter((item) => item.id !== itemId),
+          }));
+      };
 
 
     return (<>
@@ -113,7 +129,7 @@ export const ProfileView = ( {userId}) => {
                                 </Button>
                             </AlertDialog.Cancel>
                             <AlertDialog.Action>
-                                <Button variant="solid" color="red">
+                                <Button variant="solid" color="red"  onClick={() => handleDeleteCollectible(item.id)}>
                                Delete
                                 </Button>
                             </AlertDialog.Action>

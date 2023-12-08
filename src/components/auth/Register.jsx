@@ -121,7 +121,6 @@ export const Register = ({ setToken, setCurrentUserId }) => {
               required
             />
           </div>
-
           <div className="mb-4">
             <label className="block text-gray-700">Verify Password</label>
             <input
@@ -139,7 +138,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
             )}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 whitespace-pre-wrap">
             <label className="block text-gray-700">Tell Us About Yourself</label>
             <input
               className="form-input mt-1 block w-full"
