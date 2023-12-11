@@ -6,6 +6,7 @@ import { CollectiblesList } from "../components/collectibles/CollectiblesList";
 import { CollectibleDetails } from "../components/collectibles/CollectibleDetails";
 import { ProfileView } from "../components/profile/ProfileView";
 import { CreateCollectibleForm } from "../components/collectibles/CreateCollectibleForm";
+import { EditCollectibleForm } from "../components/collectibles/EditCollectibleForn";
 
 export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) => {
 
@@ -19,6 +20,7 @@ export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) 
         <Route path="/item/:itemId" element={<CollectibleDetails /> } />
         <Route path="/profile" element={<ProfileView userId={userId}/> } />
         <Route path="/create" element={<CreateCollectibleForm /> } />
+        <Route path="/edit/:itemId" element={<EditCollectibleForm userId={userId} /> } />
       </Route>
     </Routes>
   );

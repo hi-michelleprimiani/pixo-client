@@ -1,87 +1,97 @@
 import { useEffect, useState } from "react"
-import { getAllCollectiblesAndUser } from "../managers/CollectibleManager"
+import { getCollectibleById } from "../managers/CollectibleManager"
+import { getAllCategories } from "../managers/CategoriesManager"
+import { useNavigate, useParams } from "react-router-dom"
 import { Box, Button, Container } from "@radix-ui/themes"
-import { useNavigate } from "react-router-dom"
+
+export const EditCollectibleForm = ({userId}) => {
+    const { itemId } = useParams();
+    const navigate = useNavigate();
+    const [collectibleData, setCollectibleData] = useState(null);
+    const [images, setImages] = useState(["", "", ""]);
+    const [categories, setCategories] = useState([]);
+    const [chosenCategories, setChosenCategories] = useState(new Set());
+
+    useEffect(() => {
+        const fetchCollectibleData = async () => {
+            const res = await getCollectibleById(itemId);
+            setCollectibleData(res);
+            setImages(res.images.map(img => img.img_url));
+    
+            // Assuming you have categories like [{ id: 1, name: 'Art' }, ...]
+            const categoryIds = new Set(res.categories.map(cat => cat.id));
+            // Filter out any undefined or invalid category IDs
+            const validCategoryIds = Array.from(categoryIds).filter(id => categories.some(c => c.id === id));
+            setChosenCategories(new Set(validCategoryIds));
+        };
+    
+        fetchCollectibleData();
+    }, [itemId, categories]);
 
 
+    useEffect(() => {
+        getAllCategories().then(setCategories)
+    }, [])
 
-export const CreateCollectibleForm = () => {
-    const initItemState = {
-        name: "",
-        description: "",
-        price: "",
-        material: "",
-        color: "",
-        size: ""
-    }
-    const initImageState1 = ""
-    const initImageState2 = ""
-    const initImageState3 = ""
-    const [image1, updateImage1] = useState(initImageState1)
-    const [image2, updateImage2] = useState(initImageState2)
-    const [image3, updateImage3] = useState(initImageState3)
-    const imagesArray = [
-        image1,
-        image2,
-        image3
-    ];
-    const [item, updateItem] = useState(initItemState)
-    const [chosenCategories, updateChosen] = useState(new Set())
-    const [categories, changeCategories] = useState([{ id: 1, name: "Art & Collectibles"}, {id: 2, name: "Home & Living"}])
-    const navigate = useNavigate()
+    const handleUserInput = (e) => {
+        setCollectibleData({ ...collectibleData, [e.target.id]: e.target.value });
+    };
 
-    const fetchCategories  = async () => {
-        const response = await fetch("http://localhost:8000/categories", {
-            headers: {
-                Authorization: `Token ${localStorage.getItem("auth_token")}`,
-              },
-        })
-        const categories = await response.json()
-        changeCategories(categories)
-      };
+    const handleImageInput = (e) => {
+        const newImages = [...images];
+        const index = parseInt(e.target.id.replace("image", "")) - 1;
+        newImages[index] = e.target.value;
+        setImages(newImages);
+    };
 
-      const imagesObjectsArray = imagesArray
-      .filter(imageUrl => imageUrl !== "")
-      .map(imageUrl => {
-        return { img_url: imageUrl };
-    });
+    const handleCategoryChosen = (categoryId) => {
+        setChosenCategories(prevCategories => {
+            const newCategories = new Set(prevCategories);
+            if (newCategories.has(categoryId)) {
+                newCategories.delete(categoryId);
+            } else {
+                newCategories.add(categoryId);
+            }
+            return newCategories;
+        });
+    };
 
-    const postCollectible = async (evt) => {
-        evt.preventDefault()
-        await fetch(`http://localhost:8000/collectibles`, {
-            method: "POST",
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        const imagesPayload = images
+            .filter(url => url !== "") // Filter out empty URLs
+            .map(url => ({ img_url: url })); // Map to required format
+    
+        const updatedData = {
+            ...collectibleData,
+            images: imagesPayload,
+            categories: Array.from(chosenCategories)
+        };
+    
+        console.log("Submitting the following data:", updatedData); // Log the data being submitted
+    
+        const response = await fetch(`http://localhost:8000/collectibles/${itemId}`, {
+            method: "PUT",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("auth_token")}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({...item, images: imagesObjectsArray, categories: Array.from(chosenCategories)})
-        })
-        await getAllCollectiblesAndUser()
-        navigate("/")
-    }
-
-    useEffect(() => {
-        fetchCategories()
-    }, [])
-
-    const handleCategoryChosen = (category) => {
-        const copy = new Set(chosenCategories)
-        copy.has(category.id) ? copy.delete(category.id) : copy.add(category.id)
-        updateChosen(copy)
-    }
-
-    const handleImageInput1 = (e) => updateImage1(e.target.value);
-    const handleImageInput2 = (e) => updateImage2(e.target.value);
-    const handleImageInput3 = (e) => updateImage3(e.target.value);
+            body: JSON.stringify(updatedData)
+        });
+    
+        const responseBody = await response.json(); // Get the response body
+    
+        if (response.ok) {
+            console.log("Collectible updated successfully:", responseBody); // Log success response
+            navigate("/");
+        } else {
+            console.error("Failed to update collectible:", responseBody); // Log error response
+        }
+    };
     
 
-    const handleUserInput = (e) => updateItem({ ...item, [e.target.id]: e.target.value })
-
-    const formInput = (prop) => <input id={prop} type="text" value={item[prop]}
-        className="form-control" onChange={handleUserInput} />
-        return (
-            <>
-                <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
+    return (<><div>
+        <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
                     <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
                         <form className="space-y-4">
                             <h1 className="text-3xl font-bold text-center mb-6">Post New Item</h1>
@@ -92,7 +102,8 @@ export const CreateCollectibleForm = () => {
                                     autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "name")}
+                                    value={collectibleData?.name}
+                                    onChange={handleUserInput}
                                 />
                             </fieldset>
                             <fieldset className="space-y-2">
@@ -102,7 +113,8 @@ export const CreateCollectibleForm = () => {
                                     autoComplete="off"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
                                     rows="4"
-                                    onChange={(e) => handleUserInput(e, "description")}
+                                    value={collectibleData?.description}
+                                    onChange={handleUserInput}
                                 ></textarea>
                             </fieldset>
                             <fieldset className="space-y-2">
@@ -113,7 +125,8 @@ export const CreateCollectibleForm = () => {
                                     type="text"
                                     placeholder="Please enter a valid price (e.g., 120.00 or 10.00)"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "price")}
+                                    value={collectibleData?.price}
+                                    onChange={handleUserInput}
                                 />
                             </fieldset>
                             <fieldset className="space-y-2">
@@ -123,7 +136,8 @@ export const CreateCollectibleForm = () => {
                                     autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "material")}
+                                    value={collectibleData?.material}
+                                    onChange={handleUserInput}
                                 />
                             </fieldset>
                             <fieldset className="space-y-2">
@@ -133,7 +147,8 @@ export const CreateCollectibleForm = () => {
                                     autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "color")}
+                                    value={collectibleData?.color}
+                                    onChange={handleUserInput}
                                 />
                             </fieldset>
                             <fieldset className="space-y-2">
@@ -143,7 +158,8 @@ export const CreateCollectibleForm = () => {
                                     autoComplete="off"
                                     type="text"
                                     className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "size")}
+                                    value={collectibleData?.size}
+                                    onChange={handleUserInput}
                                 />
                             </fieldset>
                             <div className="block text-gray-700 leading-tight">
@@ -158,7 +174,8 @@ export const CreateCollectibleForm = () => {
                                         autoComplete="off"
                                         placeholder="first image"
                                         className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        onChange={(e) => handleImageInput1(e)}
+                                        value={images[0]}
+                                        onChange={handleImageInput}
                                     />
                                 </fieldset>
                                 <fieldset className="space-y-2">
@@ -169,7 +186,8 @@ export const CreateCollectibleForm = () => {
                                         autoComplete="off"
                                         placeholder="second image"
                                         className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        onChange={(e) => handleImageInput2(e)}
+                                        value={images[1]}
+                                        onChange={handleImageInput}
                                     />
                                 </fieldset>
                                 <fieldset className="space-y-2">
@@ -180,7 +198,8 @@ export const CreateCollectibleForm = () => {
                                         autoComplete="off"
                                         placeholder="third image"
                                         className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        onChange={(e) => handleImageInput3(e)}
+                                        value={images[2]}
+                                        onChange={handleImageInput}
                                     />
                                 </fieldset>
                             </div>
@@ -191,22 +210,21 @@ export const CreateCollectibleForm = () => {
                                         <div key={`category-${c.id}`} className="flex items-center space-x-2">
                                         <input
                                             type="checkbox"
-                                            checked={chosenCategories.has(c.id)}
-                                            onChange={() => handleCategoryChosen(c)}
                                             id={`category-${c.id}`}
+                                            checked={chosenCategories.has(c.id)}
                                             className="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-green checked:border-transparent focus:outline-none"
+                                            onChange={() => handleCategoryChosen(c.id)}
                                         />
                                         <label htmlFor={`category-${c.id}`} className="text-lg text-gray-700">{c.label}</label>
                                         </div>
                                     ))}
                                 </div>
                             </fieldset>
-                            <Button type="submit" onClick={postCollectible}>
-                                Post Item
+                            <Button type="submit" onChange={handleSubmit}>
+                                Update Item
                             </Button>
                         </form>
                     </Container>
                 </Box>
-            </>
-        );
-                                    }        
+                </div></>)
+}
