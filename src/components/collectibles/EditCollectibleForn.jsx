@@ -92,13 +92,15 @@ export const EditCollectibleForm = ({userId}) => {
             body: JSON.stringify(updatedData)
         });
     
-        const responseBody = await response.json(); // Get the response body
-    
         if (response.ok) {
-            console.log("Collectible updated successfully:", responseBody); // Log success response
-            navigate("/");
+            navigate(`/item/${itemId}`); 
         } else {
-            console.error("Failed to update collectible:", responseBody); // Log error response
+            try {
+                const responseBody = await response.json();
+                console.error("Failed to update collectible:", responseBody);
+            } catch (error) {
+                console.error("Failed to update collectible, and error parsing the response body:", error);
+            }
         }
     };
     
@@ -224,7 +226,7 @@ export const EditCollectibleForm = ({userId}) => {
                                         <input
                                             type="checkbox"
                                             id={`category-${c.id}`}
-                                            value={c.id}
+                                            checked={chosenCategories.has(c.id)}
                                             className="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-green checked:border-transparent focus:outline-none"
                                             onChange={() => handleCategoryChosen(c.id)}
                                         />
@@ -233,7 +235,7 @@ export const EditCollectibleForm = ({userId}) => {
                                     ))}
                                 </div>
                             </fieldset>
-                            <Button type="submit" onChange={handleSubmit}>
+                            <Button type="submit" onClick={handleSubmit}>
                                 Update Item
                             </Button>
                         </form>
