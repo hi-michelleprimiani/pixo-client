@@ -111,15 +111,17 @@ export const ProfileView = ( {userId}) => {
                     <div className="text-xl font-bold">{item.name}</div>
                     <p className="text-gray-600">${item.price}</p>
                     <div className="mt-2">
-                    <Button className="" variant="soft">Edit</Button>
+                    <Button variant="soft"
+                    onClick={() => navigate(`/edit/${item.id}`)}
+                    >Edit</Button>
                     <AlertDialog.Root>
                         <AlertDialog.Trigger>
-                            <Button className="float-right" color="red">Delete</Button>
+                            <Button className="float-right" variant="soft" color="red">Delete</Button>
                         </AlertDialog.Trigger>
                         <AlertDialog.Content style={{ maxWidth: 450 }}>
                             <AlertDialog.Title>Delete Item</AlertDialog.Title>
                             <AlertDialog.Description size="2">
-                            Are you sure? This item will be deleted.
+                            Are you sure? This action can not be undone.
                             </AlertDialog.Description>
 
                             <Flex gap="3" mt="4" justify="end">
