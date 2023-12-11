@@ -16,7 +16,7 @@ export const EditCollectibleForm = ({userId}) => {
         size: "",
       });
     const [images, setImages] = useState(["", "", ""]);
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([{ id: 1, name: "Art & Collectibles"}, {id: 2, name: "Home & Living"}]);
     const [chosenCategories, setChosenCategories] = useState(new Set());
 
     useEffect(() => {
@@ -32,10 +32,7 @@ export const EditCollectibleForm = ({userId}) => {
               });
             setImages(res.images.map(img => img.img_url));
     
-            const categoryIds = new Set(
-                res.categories.map(cat => cat.id).filter(id => id !== undefined)
-              );
-              setChosenCategories(categoryIds);
+            setChosenCategories(new Set(res.categories));
         };
     
         fetchCollectibleData();
