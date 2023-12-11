@@ -102,6 +102,8 @@ export const EditCollectibleForm = ({userId}) => {
     };
     
 
+    
+
     return (<><div>
         <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
                     <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
