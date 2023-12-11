@@ -7,7 +7,14 @@ import { Box, Button, Container } from "@radix-ui/themes"
 export const EditCollectibleForm = ({userId}) => {
     const { itemId } = useParams();
     const navigate = useNavigate();
-    const [collectibleData, setCollectibleData] = useState(null);
+    const [collectibleData, setCollectibleData] = useState({
+        name: "",
+        description: "",
+        price: "",
+        material: "",
+        color: "",
+        size: "",
+      });
     const [images, setImages] = useState(["", "", ""]);
     const [categories, setCategories] = useState([]);
     const [chosenCategories, setChosenCategories] = useState(new Set());
@@ -15,14 +22,20 @@ export const EditCollectibleForm = ({userId}) => {
     useEffect(() => {
         const fetchCollectibleData = async () => {
             const res = await getCollectibleById(itemId);
-            setCollectibleData(res);
+            setCollectibleData({
+                name: res.name || "",
+                description: res.description || "",
+                price: res.price || "",
+                material: res.material || "",
+                color: res.color || "",
+                size: res.size || "",
+              });
             setImages(res.images.map(img => img.img_url));
     
-            // Assuming you have categories like [{ id: 1, name: 'Art' }, ...]
-            const categoryIds = new Set(res.categories.map(cat => cat.id));
-            // Filter out any undefined or invalid category IDs
-            const validCategoryIds = Array.from(categoryIds).filter(id => categories.some(c => c.id === id));
-            setChosenCategories(new Set(validCategoryIds));
+            const categoryIds = new Set(
+                res.categories.map(cat => cat.id).filter(id => id !== undefined)
+              );
+              setChosenCategories(categoryIds);
         };
     
         fetchCollectibleData();
@@ -94,7 +107,7 @@ export const EditCollectibleForm = ({userId}) => {
         <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
                     <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
                         <form className="space-y-4">
-                            <h1 className="text-3xl font-bold text-center mb-6">Post New Item</h1>
+                            <h1 className="text-3xl font-bold text-center mb-6">Edit Item</h1>
                             <fieldset className="space-y-2">
                                 <label htmlFor="name" className="block text-lg font-bold text-gray-700 leading-tight">Name</label>
                                 <input
@@ -211,7 +224,7 @@ export const EditCollectibleForm = ({userId}) => {
                                         <input
                                             type="checkbox"
                                             id={`category-${c.id}`}
-                                            checked={chosenCategories.has(c.id)}
+                                            value={c.id}
                                             className="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-green checked:border-transparent focus:outline-none"
                                             onChange={() => handleCategoryChosen(c.id)}
                                         />
