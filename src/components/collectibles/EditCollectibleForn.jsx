@@ -3,6 +3,7 @@ import { getCollectibleById } from "../managers/CollectibleManager"
 import { getAllCategories } from "../managers/CategoriesManager"
 import { useNavigate, useParams } from "react-router-dom"
 import { Box, Button, Container } from "@radix-ui/themes"
+import { FormInput } from "../utils/FormInput"
 
 export const EditCollectibleForm = ({userId}) => {
     const { itemId } = useParams();
@@ -23,18 +24,16 @@ export const EditCollectibleForm = ({userId}) => {
         const fetchCollectibleData = async () => {
             const res = await getCollectibleById(itemId);
             setCollectibleData({
-                name: res.name || "",
-                description: res.description || "",
-                price: res.price || "",
-                material: res.material || "",
-                color: res.color || "",
-                size: res.size || "",
+                name: res.name,
+                description: res.description,
+                price: res.price,
+                material: res.material,
+                color: res.color,
+                size: res.size
               });
             setImages(res.images.map(img => img.img_url));
-    
             setChosenCategories(new Set(res.categories));
         };
-    
         fetchCollectibleData();
     }, [itemId, categories]);
 
@@ -101,7 +100,6 @@ export const EditCollectibleForm = ({userId}) => {
         }
     };
     
-
     
 
     return (<><div>
@@ -109,131 +107,39 @@ export const EditCollectibleForm = ({userId}) => {
                     <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
                         <form className="space-y-4">
                             <h1 className="text-3xl font-bold text-center mb-6">Edit Item</h1>
-                            <fieldset className="space-y-2">
                                 <label htmlFor="name" className="block text-lg font-bold text-gray-700 leading-tight">Name</label>
-                                <input
-                                    id="name"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    value={collectibleData?.name}
-                                    onChange={handleUserInput}
-                                />
-                            </fieldset>
-                            <fieldset className="space-y-2">
+                                <FormInput id="name" type="text" value={collectibleData?.name} onChange={handleUserInput}/>
                                 <label htmlFor="description" className="block text-lg font-bold text-gray-700 leading-tight">Description</label>
-                                <textarea
-                                    id="description"
-                                    autoComplete="off"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    rows="4"
-                                    value={collectibleData?.description}
-                                    onChange={handleUserInput}
-                                ></textarea>
-                            </fieldset>
-                            <fieldset className="space-y-2">
+                                <FormInput id="description" type="textarea" value={collectibleData?.description} onChange={handleUserInput}/>
                                 <label htmlFor="price" className="block text-lg font-bold text-gray-700 leading-tight">Price</label>
-                                <input
-                                    id="price"
-                                    autoComplete="off"
-                                    type="text"
-                                    placeholder="Please enter a valid price (e.g., 120.00 or 10.00)"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    value={collectibleData?.price}
-                                    onChange={handleUserInput}
-                                />
-                            </fieldset>
-                            <fieldset className="space-y-2">
+                                <FormInput id="price" type="text" value={collectibleData?.price} onChange={handleUserInput}/>
                                 <label htmlFor="material" className="block text-lg font-bold text-gray-700 leading-tight">Material</label>
-                                <input
-                                    id="material"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    value={collectibleData?.material}
-                                    onChange={handleUserInput}
-                                />
-                            </fieldset>
-                            <fieldset className="space-y-2">
+                                <FormInput id="material" type="text" value={collectibleData?.material} onChange={handleUserInput}/>
                                 <label htmlFor="color" className="block text-lg font-bold text-gray-700 leading-tight">Color</label>
-                                <input
-                                    id="color"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    value={collectibleData?.color}
-                                    onChange={handleUserInput}
-                                />
-                            </fieldset>
-                            <fieldset className="space-y-2">
+                                <FormInput id="color" type="text" value={collectibleData?.color} onChange={handleUserInput}/>
                                 <label htmlFor="size" className="block text-lg font-bold text-gray-700 leading-tight">Size</label>
-                                <input
-                                    id="size"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    value={collectibleData?.size}
-                                    onChange={handleUserInput}
-                                />
-                            </fieldset>
-                            <div className="block text-gray-700 leading-tight">
+                                <FormInput id="size" type="text" value={collectibleData?.size} onChange={handleUserInput}/>
+                                <div className="block text-gray-700 leading-tight">
                                 <div className="text-1xl font-bold text-center mb-6">
                                 Please Provide Up To Three Image URLS
                                 </div>
-                                <fieldset className="space-y-2">
-                                    <label htmlFor="image1" className="block text-lg font-bold text-gray-700 leading-tight"></label>
-                                    <input
-                                        id="image1"
-                                        type="url"
-                                        autoComplete="off"
-                                        placeholder="first image"
-                                        className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        value={images[0]}
-                                        onChange={handleImageInput}
-                                    />
-                                </fieldset>
-                                <fieldset className="space-y-2">
-                                    <label htmlFor="image2" className="block text-lg font-bold text-gray-700 leading-tight"></label>
-                                    <input
-                                        id="image2"
-                                        type="url"
-                                        autoComplete="off"
-                                        placeholder="second image"
-                                        className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        value={images[1]}
-                                        onChange={handleImageInput}
-                                    />
-                                </fieldset>
-                                <fieldset className="space-y-2">
-                                    <label htmlFor="image3" className="block text-lg font-bold text-gray-700 leading-tight"></label>
-                                    <input
-                                        id="image3"
-                                        type="url"
-                                        autoComplete="off"
-                                        placeholder="third image"
-                                        className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        value={images[2]}
-                                        onChange={handleImageInput}
-                                    />
-                                </fieldset>
-                            </div>
-                            <fieldset className="space-y-2">
+                                <FormInput id="image1" type="url" onChange={handleImageInput} placeholder="first image" value={images[0]}/>  
+                                <FormInput id="image2" type="url" onChange={handleImageInput} placeholder="second image" value={images[1]}/>  
+                                <FormInput id="image3" type="url" onChange={handleImageInput} placeholder="third image" value={images[2]}/>  
+                                </div>
                                 <div className="form-group">
                                     <p className="text-1xl font-bold text-center mb-6">Categories</p>
-                                    {categories.map((c) => (
-                                        <div key={`category-${c.id}`} className="flex items-center space-x-2">
-                                        <input
-                                            type="checkbox"
-                                            id={`category-${c.id}`}
-                                            checked={chosenCategories.has(c.id)}
-                                            className="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-green checked:border-transparent focus:outline-none"
-                                            onChange={() => handleCategoryChosen(c.id)}
-                                        />
-                                        <label htmlFor={`category-${c.id}`} className="text-lg text-gray-700">{c.label}</label>
-                                        </div>
-                                    ))}
+                                    {categories.map((category) => (
+                                <FormInput
+                                    key={`category-${category.id}`}
+                                    type="checkbox"
+                                    id={`category-${category.id}`}
+                                    checked={chosenCategories.has(category.id)}
+                                    onChange={() => handleCategoryChosen(category.id)}
+                                    children={category.label}
+                                />
+                            ))}
                                 </div>
-                            </fieldset>
                             <Button type="submit" onClick={handleSubmit}>
                                 Update Item
                             </Button>
