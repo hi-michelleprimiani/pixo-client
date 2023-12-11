@@ -77,8 +77,29 @@ export const CreateCollectibleForm = () => {
 
     const handleUserInput = (e) => updateItem({ ...item, [e.target.id]: e.target.value })
 
-    const formInput = (prop) => <input id={prop} type="text" value={item[prop]}
-        className="form-control" onChange={handleUserInput} />
+    const formInput = (prop) => <input 
+    id={prop}
+    type="text" 
+    value={item[prop]}
+    autoComplete="off" 
+    onChange={handleUserInput} 
+    className="w-full p-2 border border-gray-300 rounded-lg leading-tight"/>
+
+    const createImageInputField = (id, placeholder, onChangeHandler) => (
+        <fieldset className="space-y-2">
+            <label htmlFor={id} className="block text-lg font-bold text-gray-700 leading-tight"></label>
+            <input
+                id={id}
+                type="url"
+                autoComplete="off"
+                placeholder={placeholder}
+                className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
+                onChange={onChangeHandler}
+            />
+        </fieldset>
+    );
+
+        
         return (
             <>
                 <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
@@ -87,13 +108,7 @@ export const CreateCollectibleForm = () => {
                             <h1 className="text-3xl font-bold text-center mb-6">Post New Item</h1>
                             <fieldset className="space-y-2">
                                 <label htmlFor="name" className="block text-lg font-bold text-gray-700 leading-tight">Name</label>
-                                <input
-                                    id="name"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "name")}
-                                />
+                                {formInput("name")}
                             </fieldset>
                             <fieldset className="space-y-2">
                                 <label htmlFor="description" className="block text-lg font-bold text-gray-700 leading-tight">Description</label>
@@ -107,82 +122,27 @@ export const CreateCollectibleForm = () => {
                             </fieldset>
                             <fieldset className="space-y-2">
                                 <label htmlFor="price" className="block text-lg font-bold text-gray-700 leading-tight">Price</label>
-                                <input
-                                    id="price"
-                                    autoComplete="off"
-                                    type="text"
-                                    placeholder="Please enter a valid price (e.g., 120.00 or 10.00)"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "price")}
-                                />
+                                {formInput("price")}
                             </fieldset>
                             <fieldset className="space-y-2">
                                 <label htmlFor="material" className="block text-lg font-bold text-gray-700 leading-tight">Material</label>
-                                <input
-                                    id="material"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "material")}
-                                />
+                                {formInput("material")}
                             </fieldset>
                             <fieldset className="space-y-2">
                                 <label htmlFor="color" className="block text-lg font-bold text-gray-700 leading-tight">Color</label>
-                                <input
-                                    id="color"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "color")}
-                                />
+                                {formInput("color")}
                             </fieldset>
                             <fieldset className="space-y-2">
                                 <label htmlFor="size" className="block text-lg font-bold text-gray-700 leading-tight">Size</label>
-                                <input
-                                    id="size"
-                                    autoComplete="off"
-                                    type="text"
-                                    className="w-full p-2 border border-gray-300 rounded-lg"
-                                    onChange={(e) => handleUserInput(e, "size")}
-                                />
+                                {formInput("size")}
                             </fieldset>
                             <div className="block text-gray-700 leading-tight">
                                 <div className="text-1xl font-bold text-center mb-6">
                                 Please Provide Up To Three Image URLS
                                 </div>
-                                <fieldset className="space-y-2">
-                                    <label htmlFor="image1" className="block text-lg font-bold text-gray-700 leading-tight"></label>
-                                    <input
-                                        id="image1"
-                                        type="url"
-                                        autoComplete="off"
-                                        placeholder="first image"
-                                        className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        onChange={(e) => handleImageInput1(e)}
-                                    />
-                                </fieldset>
-                                <fieldset className="space-y-2">
-                                    <label htmlFor="image2" className="block text-lg font-bold text-gray-700 leading-tight"></label>
-                                    <input
-                                        id="image2"
-                                        type="url"
-                                        autoComplete="off"
-                                        placeholder="second image"
-                                        className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        onChange={(e) => handleImageInput2(e)}
-                                    />
-                                </fieldset>
-                                <fieldset className="space-y-2">
-                                    <label htmlFor="image3" className="block text-lg font-bold text-gray-700 leading-tight"></label>
-                                    <input
-                                        id="image3"
-                                        type="url"
-                                        autoComplete="off"
-                                        placeholder="third image"
-                                        className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
-                                        onChange={(e) => handleImageInput3(e)}
-                                    />
-                                </fieldset>
+                                {createImageInputField("image1", "first image", handleImageInput1)}
+                                {createImageInputField("image2", "second image", handleImageInput2)}
+                                {createImageInputField("image3", "third image", handleImageInput3)}
                             </div>
                             <fieldset className="space-y-2">
                                 <div className="form-group">
@@ -209,4 +169,4 @@ export const CreateCollectibleForm = () => {
                 </Box>
             </>
         );
-                                    }        
+}        
