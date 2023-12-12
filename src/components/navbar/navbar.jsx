@@ -5,7 +5,7 @@ import { getPixoUserById } from "../managers/PixoUserManager";
 import { getAllCategories } from "../managers/CategoriesManager";
 import { ProfileDropDown } from "./ProfileDropDown";
 
-export const NavBar = ( {userId, setToken, categories, selectedCategory, setSelectedCategory }) => {
+export const NavBar = ( {userId, setToken}) => {
   const [pixoUser, setPixoUser] = useState([])
   const navigate = useNavigate();
 
