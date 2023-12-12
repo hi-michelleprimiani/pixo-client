@@ -12,7 +12,7 @@ export const CollectiblesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filteredCollectibles, setFilteredItems] = useState([]);
 
-
+//comment
   useEffect(() => {
     getAllCollectiblesAndUser().then(setCollectibles);
     getAllCategories().then(setCategories);
