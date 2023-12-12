@@ -8,8 +8,9 @@ import { AspectRatio, Card, Container, Grid, Inset } from "@radix-ui/themes";
 export const CategoryFilter = ({ categories, selectedCategory, setSelectedCategory }) => {
 
 
-    return (<><div>
-          <div>
+    return (<>
+      <div>
+        <div className="flex justify-start ml-auto mr-auto p-4 max-w-screen-lg mb-5">
           <select
             className="category-filter"
             value={selectedCategory} 
