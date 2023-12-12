@@ -2,7 +2,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Avatar } from '@radix-ui/themes';
 import { NavLink, useNavigate } from "react-router-dom";
 
-export const ProfileDropDown = ({userId, pixoUser}) => {
+export const ProfileDropDown = ({userId, pixoUser, setToken}) => {
 
 
     return (

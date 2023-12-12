@@ -4,10 +4,8 @@ import { useEffect, useState } from "react";
 import { getPixoUserById } from "../managers/PixoUserManager";
 import { getAllCategories } from "../managers/CategoriesManager";
 import { ProfileDropDown } from "./ProfileDropDown";
-import { CategoryFilter } from "../collectibles/CategoryFilter";
 
-
-export const NavBar = ( {userId, setToken }) => {
+export const NavBar = ( {userId, setToken, categories, selectedCategory, setSelectedCategory }) => {
   const [pixoUser, setPixoUser] = useState([])
   const navigate = useNavigate();
 
@@ -28,7 +26,7 @@ export const NavBar = ( {userId, setToken }) => {
             </NavLink>
           </div>
           <div className="m-5 flex-shrink-0 flex items-center">
-            <ProfileDropDown userId={userId} pixoUser={pixoUser}/>
+            <ProfileDropDown userId={userId} pixoUser={pixoUser} setToken={setToken}/>
           </div>
         </div>
       </div>

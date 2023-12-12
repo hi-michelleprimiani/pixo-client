@@ -4,11 +4,14 @@ import { getAllCategories } from "../managers/CategoriesManager";
 import { CategoryFilter } from "./CategoryFilter";
 import { CollectiblesList } from "./CollectiblesList";
 
+
+
 export const CollectiblesPage = () => {
   const [collectibles, setCollectibles] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filteredCollectibles, setFilteredItems] = useState([]);
+
 
   useEffect(() => {
     getAllCollectiblesAndUser().then(setCollectibles);
@@ -29,7 +32,7 @@ export const CollectiblesPage = () => {
       setFilteredItems(filtered);
     }
   }, [selectedCategory, collectibles]);
-  
+
   return (
     <>
       <CategoryFilter

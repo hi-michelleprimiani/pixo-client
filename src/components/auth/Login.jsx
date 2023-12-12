@@ -34,7 +34,7 @@ export const Login = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Username</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="text"
               name="username"
               value={username}
@@ -47,7 +47,7 @@ export const Login = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="password"
               name="password"
               value={password}
