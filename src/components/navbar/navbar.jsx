@@ -6,7 +6,7 @@ import { getAllCategories } from "../managers/CategoriesManager";
 import { ProfileDropDown } from "./ProfileDropDown";
 import { CategoryFilter } from "../collectibles/CategoryFilter";
 
-export const NavBar = ( {userId, setToken, categories, selectedCategory, setSelectedCategory }) => {
+export const NavBar = ( {userId, setToken}) => {
   const [pixoUser, setPixoUser] = useState([])
 
 
