@@ -3,19 +3,8 @@ import { getAllCollectiblesAndUser } from "../managers/CollectibleManager";
 import { Grid, Card, Inset, AspectRatio, Container } from '@radix-ui/themes';
 import { useNavigate } from "react-router-dom";
 
-export const CollectiblesList = () => {
-  const [collectibles, setCollectibles] = useState([]);
+export const CollectiblesList = ({collectibles}) => {
   const navigate = useNavigate()
-
-  useEffect(() => {
-    getAllCollectiblesAndUser()
-      .then((data) => {
-        setCollectibles(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching collectibles:", error);
-      });
-  }, []);
 
   return (
     <Container className="lg (1024px)">

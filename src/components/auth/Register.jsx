@@ -65,7 +65,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">First Name</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="text"
               name="firstName"
               value={formData.firstName}
@@ -78,7 +78,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Last Name</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="text"
               name="lastName"
               value={formData.lastName}
@@ -90,7 +90,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="email"
               name="email"
               value={formData.email}
@@ -101,7 +101,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Username</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="text"
               name="username"
               value={formData.username}
@@ -113,7 +113,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="password"
               name="password"
               value={formData.password}
@@ -124,7 +124,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Verify Password</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="password"
               name="verifyPassword"
               value={formData.verifyPassword}
@@ -140,8 +140,8 @@ export const Register = ({ setToken, setCurrentUserId }) => {
 
           <div className="mb-4 whitespace-pre-wrap">
             <label className="block text-gray-700">Tell Us About Yourself</label>
-            <input
-              className="form-input mt-1 block w-full"
+            <textarea
+              className="input"
               type="text"
               name="bio"
               value={formData.bio}
@@ -153,7 +153,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Location</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="text"
               name="location"
               value={formData.location}
@@ -165,7 +165,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           <div className="mb-4">
             <label className="block text-gray-700">Profile Picture</label>
             <input
-              className="form-input mt-1 block w-full"
+              className="input"
               type="text"
               name="imgurl"
               value={formData.imgurl}
