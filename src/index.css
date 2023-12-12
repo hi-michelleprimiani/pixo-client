@@ -1,6 +1,29 @@
-
+/* styles.css */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.fieldset {
+  @apply space-y-2;
+}
+
+.input {
+  @apply w-full p-2 border border-gray-300 rounded-lg leading-tight;
+}
+
+.input-url {
+  @apply w-full p-2 border border-gray-300 rounded-lg leading-tight m-1;
+}
+
+.input-checkbox {
+  @apply appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-green checked:border-transparent focus:outline-none my-0.5;
+}
+
+.label-form {
+    @apply block text-lg font-bold text-gray-700 leading-tight
+}
+
+.div-form-center {
+    @apply text-xl font-bold text-center mb-6 
+}

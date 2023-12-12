@@ -4,26 +4,26 @@ export const FormInput = ({ type, id, value, onChange, placeholder, checked, chi
     switch (type) {
         case 'textarea':
             return (
-                <fieldset className="space-y-2">
+                <fieldset className="fieldset">
                 <textarea
                     id={id}
                     value={value}
                     onChange={onChange}
                     placeholder={placeholder}
-                    className= "w-full p-2 border border-gray-300 rounded-lg"
+                    className= "input"
                     />
                     </fieldset>
             );
         case 'checkbox':
             return (
-                <fieldset className="space-y-2">
+                <fieldset className="fieldset">
                 <div className="flex items-center space-x-2">
                     <input
                         id={id}
                         type="checkbox"
                         checked={checked}
                         onChange={onChange}
-                        className="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-green checked:border-transparent focus:outline-none"
+                        className="input-checkbox"
                     />
                     <label htmlFor={id}>{children}</label>
                 </div>
@@ -31,7 +31,7 @@ export const FormInput = ({ type, id, value, onChange, placeholder, checked, chi
             );
         case 'url':
                 return (
-                    <fieldset className="space-y-2">
+                    <fieldset className="fieldset">
                     <input
                         id={id}
                         type="url"
@@ -39,13 +39,13 @@ export const FormInput = ({ type, id, value, onChange, placeholder, checked, chi
                         placeholder={placeholder}
                         value={value}
                         autoComplete="off"
-                        className="w-full p-2 border border-gray-300 rounded-lg leading-tight m-1"
+                        className="input-url"
                         />
                         </fieldset>
                 );
         default:
             return (
-                <fieldset className="space-y-2">
+                <fieldset className="fieldset">
                 <input
                     id={id}
                     type={type}
@@ -53,7 +53,7 @@ export const FormInput = ({ type, id, value, onChange, placeholder, checked, chi
                     onChange={onChange}
                     placeholder={placeholder}
                     autoComplete="off"
-                    className="w-full p-2 border border-gray-300 rounded-lg leading-tight"
+                    className="input"
                     />
                     </fieldset>
             );

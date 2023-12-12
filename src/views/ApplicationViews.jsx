@@ -6,7 +6,7 @@ import { CollectiblesList } from "../components/collectibles/CollectiblesList";
 import { CollectibleDetails } from "../components/collectibles/CollectibleDetails";
 import { ProfileView } from "../components/profile/ProfileView";
 import { CreateCollectibleForm } from "../components/collectibles/CreateCollectibleForm";
-import { EditCollectibleForm } from "../components/collectibles/EditCollectibleForn";
+import { EditCollectibleForm } from "../components/collectibles/EditCollectibleForm";
 
 export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) => {
 

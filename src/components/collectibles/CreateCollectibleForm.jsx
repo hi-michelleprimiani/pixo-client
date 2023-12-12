@@ -80,42 +80,42 @@ export const CreateCollectibleForm = () => {
             <>
                 <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
                     <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-                        <form className="space-y-4">
+                        <form className="space-y-3">
                             <h1 className="text-3xl font-bold text-center mb-6">Post New Item</h1>
-                                <label htmlFor="name" className="block text-lg font-bold text-gray-700 leading-tight">Name</label>
+                                <label htmlFor="name" className="label-form">Name</label>
                                 <FormInput type="text" id="name" value={item.name} onChange={handleUserInput} />
-                                <label htmlFor="description" className="block text-lg font-bold text-gray-700 leading-tight">Description</label>
+                                <label htmlFor="description" className="label-form">Description</label>
                                 <FormInput type="textarea" id="description" value={item.description} onChange={handleUserInput} className="w-full p-2 border border-gray-300 rounded-lg" rows="4" />
-                                <label htmlFor="price" className="block text-lg font-bold text-gray-700 leading-tight">Price</label>
+                                <label htmlFor="price" className="label-form">Price</label>
                                <FormInput type="text" id="price" value={item.price} onChange={handleUserInput} />
-                                <label htmlFor="material" className="block text-lg font-bold text-gray-700 leading-tight">Material</label>
+                                <label htmlFor="material" className="label-form">Material</label>
                                <FormInput type="text" id="material" value={item.material} onChange={handleUserInput} />
-                                <label htmlFor="color" className="block text-lg font-bold text-gray-700 leading-tight">Color</label>
+                                <label htmlFor="color" className="label-form">Color</label>
                                <FormInput type="text" id="color" value={item.color} onChange={handleUserInput} />
-                                <label htmlFor="size" className="block text-lg font-bold text-gray-700 leading-tight">Size</label>
-                               <FormInput type="text" id="size" value={item.size} onChange={handleUserInput} />
+                                <label htmlFor="size" className="label-form">Size</label>
+                               <FormInput type="text" id="size" value={item.size} onChange={handleUserInput}/>
                             <div className="block text-gray-700 leading-tight">
-                                <div className="text-1xl font-bold text-center mb-6">
+                                <div className="div-form-center">
                                 Please Provide Up To Three Image URLS
                                 </div>
                                 <FormInput id="image1" type="url" onChange={(e) => handleImageInput1(e)} placeholder="first image" />
                                 <FormInput id="image2" type="url" onChange={(e) => handleImageInput2(e)} placeholder="second image" />
                                 <FormInput id="image3" type="url" onChange={(e) => handleImageInput3(e)} placeholder="third image" />
-                            </div>
                                 <div className="form-group">
-                                    <p className="text-1xl font-bold text-center mb-6">Categories</p>
+                                    <p className="div-form-center">Categories</p>
                                     {categories.map((c) => (
-                            <FormInput
-                                key={`category-${c.id}`}
-                                type="checkbox"
-                                id={`category-${c.id}`}
-                                checked={chosenCategories.has(c.id)}
-                                onChange={() => handleCategoryChosen(c)}
-                                className="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-green checked:border-transparent focus:outline-none"
-                            >
+                                        <FormInput
+                                        key={`category-${c.id}`}
+                                        type="checkbox"
+                                        id={`category-${c.id}`}
+                                        checked={chosenCategories.has(c.id)}
+                                        onChange={() => handleCategoryChosen(c)}
+                                        className="input-checkbox"
+                                        >
                                 {c.label}
                             </FormInput>
                         ))}
+                        </div>
                                 </div>
                             <Button type="submit" onClick={postCollectible}>
                                 Post Item
