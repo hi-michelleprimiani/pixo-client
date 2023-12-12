@@ -7,7 +7,6 @@ import { ProfileDropDown } from "./ProfileDropDown";
 
 export const NavBar = ( {userId, setToken}) => {
   const [pixoUser, setPixoUser] = useState([])
-  const navigate = useNavigate();
 
 
   useEffect(() => {
