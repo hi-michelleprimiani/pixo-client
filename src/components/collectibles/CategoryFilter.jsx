@@ -5,7 +5,7 @@ export const CategoryFilter = ({ categories, selectedCategory, setSelectedCatego
 
     return (<>
       <div>
-        <div className="flex justify-start ml-auto mr-auto p-4 max-w-screen-lg mb-5">
+        <div className="flex justify-start ml-auto mr-auto max-w-screen-lg mb-10">
           <select
             className="category-filter"
             value={selectedCategory} 
