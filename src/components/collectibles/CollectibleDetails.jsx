@@ -29,6 +29,7 @@ export const CollectibleDetails = () => {
                     width: '60%',
                     height: '100%',
                     backgroundColor: 'var(--gray-5)',
+                    margin: '10px'
                 }}
                 />
                 ))

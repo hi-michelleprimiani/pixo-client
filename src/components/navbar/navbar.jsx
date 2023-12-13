@@ -18,7 +18,7 @@ export const NavBar = ({ userId, setToken }) => {
           <NavLink to="/" className="flex-shrink-0 flex items-center text-black hover:text-green">
             <span className="text-2xl font-bold">Pixo</span>
           </NavLink>
-          
+
           {/* Right-aligned items */}
           <div className="flex items-center">
             {/* Profile Dropdown */}
