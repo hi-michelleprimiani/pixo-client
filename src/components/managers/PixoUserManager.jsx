@@ -9,7 +9,7 @@ export const getPixoUsers = () => {
 }
 
 
-export const getPixoUserById = async (userId) => {
+export const getPixoUserAndCollectiblesById = async (userId) => {
     let url = `http://localhost:8000/pixouser/${userId}`;
     const response = await fetch(url, {
       headers: {

@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPixoUserById } from "../managers/PixoUserManager";
+import { getPixoUserAndCollectiblesById } from "../managers/PixoUserManager";
 import { ProfileDropDown } from "./ProfileDropDown";
 
 export const NavBar = ({ userId, setToken }) => {
   const [pixoUser, setPixoUser] = useState([]);
 
   useEffect(() => {
-    getPixoUserById(userId).then(setPixoUser);
+    getPixoUserAndCollectiblesById(userId).then(setPixoUser);
   }, [userId]);
 
   return (

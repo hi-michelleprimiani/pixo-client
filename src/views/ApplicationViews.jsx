@@ -23,7 +23,7 @@ export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) 
         <Route path="/profile" element={<ProfileView userId={userId}/> } />
         <Route path="/create" element={<CreateCollectibleForm /> } />
         <Route path="/edit/:itemId" element={<EditCollectibleForm userId={userId} /> } />
-        <Route path="/cart" element={<Cart /> } />
+        <Route path="/cart" element={<Cart userId={userId} /> } />
       </Route>
     </Routes>
   );
