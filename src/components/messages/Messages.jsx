@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getMessagesByUser, createMessage } from "../managers/MessagesManager";
 import React from 'react';
-import './messages.css';
+
 
 
 export const Messages = ({ userId }) => {
@@ -9,7 +9,6 @@ export const Messages = ({ userId }) => {
     const [selectedConversationKey, setSelectedConversationKey] = useState(null);
     const [messageInput, setMessageInput] = useState('');
     const currentUserID = parseInt(userId);
-    const messagesEndRef = useRef(null);
 
 
     useEffect(() => {
@@ -19,9 +18,6 @@ export const Messages = ({ userId }) => {
         });
     }, [userId]);
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [conversations]);
 
     const groupMessagesByConversation = (messages, userID) => {
         return messages.reduce((acc, message) => {
@@ -41,9 +37,6 @@ export const Messages = ({ userId }) => {
         }, {});
     };
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
 
     const handleSelectConversation = (conversationKey) => {
         setSelectedConversationKey(conversationKey);
