@@ -63,7 +63,8 @@ export const CollectibleDetails = () => {
         <div className="flex items-center mb-4">
           <Avatar
             fallback={chosenCollectible.seller?.user.first_name}
-            src={chosenCollectible.seller?.img_url}>
+            src={chosenCollectible.seller?.img_url}
+            >
           </Avatar>
           <div className="ml-2">
             <p>{chosenCollectible.seller?.user.first_name} {chosenCollectible.seller?.user.last_name} - User Rating</p>
