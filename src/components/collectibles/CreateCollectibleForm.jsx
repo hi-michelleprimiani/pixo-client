@@ -58,7 +58,7 @@ export const CreateCollectibleForm = () => {
             body: JSON.stringify({...item, images: imagesObjectsArray, categories: Array.from(chosenCategories)})
         })
         await getAllCollectiblesAndUser()
-        navigate("/")
+        navigate("/profile")
     }
 
 

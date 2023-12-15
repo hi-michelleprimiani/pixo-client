@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { getPixoUserById } from "../managers/PixoUserManager"
+import { getPixoUserAndCollectiblesById } from "../managers/PixoUserManager"
 import { AlertDialog, AspectRatio, Avatar, Box, Button, Card, Container, Flex, Grid, Inset, Popover, Text, TextArea } from "@radix-ui/themes"
 import { useNavigate } from "react-router-dom"
-import { deleteCollectible } from "../managers/CollectibleManager"
+import { deleteCollectible, getAllCollectiblesAndUser } from "../managers/CollectibleManager"
 
 
 
@@ -11,9 +11,8 @@ export const ProfileView = ( {userId}) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getPixoUserById(userId).then(setUser)
+        getPixoUserAndCollectiblesById(userId).then(setUser)
     }, [userId])
-
 
 
     const handleDeleteCollectible = async (itemId) => {

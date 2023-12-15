@@ -7,6 +7,8 @@ import { ProfileView } from "../components/profile/ProfileView";
 import { CreateCollectibleForm } from "../components/collectibles/CreateCollectibleForm";
 import { EditCollectibleForm } from "../components/collectibles/EditCollectibleForm";
 import { CollectiblesPage } from "../components/collectibles/CollectiblesPage";
+import { Cart } from "../components/cart/Cart"
+
 
 export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) => {
 
@@ -21,6 +23,7 @@ export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) 
         <Route path="/profile" element={<ProfileView userId={userId}/> } />
         <Route path="/create" element={<CreateCollectibleForm /> } />
         <Route path="/edit/:itemId" element={<EditCollectibleForm userId={userId} /> } />
+        <Route path="/cart" element={<Cart userId={userId} /> } />
       </Route>
     </Routes>
   );

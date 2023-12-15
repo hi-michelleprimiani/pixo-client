@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { getAllCollectiblesAndUser } from "../managers/CollectibleManager";
+
 import { Grid, Card, Inset, AspectRatio, Container } from '@radix-ui/themes';
 import { useNavigate } from "react-router-dom";
 

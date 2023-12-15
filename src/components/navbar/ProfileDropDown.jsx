@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 export const ProfileDropDown = ({userId, pixoUser, setToken}) => {
 
+  const navigate = useNavigate()
 
     return (
         <>

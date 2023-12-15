@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCollectibleById } from "../managers/CollectibleManager";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Avatar, Button, Box, Container, Tabs, Text } from '@radix-ui/themes';
 import { HeartFilledIcon, AvatarIcon } from '@radix-ui/react-icons'
 
@@ -8,10 +8,28 @@ import { HeartFilledIcon, AvatarIcon } from '@radix-ui/react-icons'
 export const CollectibleDetails = () => {
   const [chosenCollectible, setChosenCollectible] = useState({});
   const { itemId } = useParams();
+  const initialItemState = {
+    collectible: itemId,
+    quantity: 1
+  }
+  const navigate = useNavigate()
 
   useEffect(() => {
     getCollectibleById(itemId).then(setChosenCollectible);
   }, [itemId]);
+
+  const addItemToCart = async(evt) => {
+    evt.preventDefault()
+    await fetch(`http://localhost:8000/cartitems`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Token ${localStorage.getItem("auth_token")}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(initialItemState)
+    })
+    navigate("/cart")
+  }
 
   return (
     <Container className="lg (1024px)">
@@ -29,6 +47,7 @@ export const CollectibleDetails = () => {
                     width: '60%',
                     height: '100%',
                     backgroundColor: 'var(--gray-5)',
+                    margin: '10px'
                 }}
                 />
                 ))
@@ -54,7 +73,7 @@ export const CollectibleDetails = () => {
           </div>
         </div>
         <div className="mb-2 text-center flex flex-row justify-center">
-        <Button>Add To Cart</Button>
+        <Button onClick={addItemToCart} >Add To Cart</Button>
         <div className="ml-5">
         <Button><HeartFilledIcon/>Add To Favorites</Button>
         </div>
