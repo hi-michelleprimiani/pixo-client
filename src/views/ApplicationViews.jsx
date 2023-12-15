@@ -8,6 +8,7 @@ import { CreateCollectibleForm } from "../components/collectibles/CreateCollecti
 import { EditCollectibleForm } from "../components/collectibles/EditCollectibleForm";
 import { CollectiblesPage } from "../components/collectibles/CollectiblesPage";
 import { Cart } from "../components/cart/Cart"
+import { Messages } from "../components/messages/Messages";
 
 
 export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) => {
@@ -24,6 +25,7 @@ export const ApplicationViews = ({ token, setToken, userId, setCurrentUserId }) 
         <Route path="/create" element={<CreateCollectibleForm /> } />
         <Route path="/edit/:itemId" element={<EditCollectibleForm userId={userId} /> } />
         <Route path="/cart" element={<Cart userId={userId} /> } />
+        <Route path="/messages" element={<Messages userId={userId} /> } />
       </Route>
     </Routes>
   );
