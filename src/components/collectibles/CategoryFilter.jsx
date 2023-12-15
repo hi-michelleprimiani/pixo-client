@@ -18,3 +18,4 @@ export const CategoryFilter = ({ categories, selectedCategory, setSelectedCatego
     </>
   );
 };
+

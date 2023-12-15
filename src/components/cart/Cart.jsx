@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCartByUser } from "../managers/CartManager";
+import { deleteCartItem, getCartByUser } from "../managers/CartManager";
 import { useNavigate } from "react-router-dom";
 import { AspectRatio, Button, Card, Container, Flex, Inset } from "@radix-ui/themes";
 
@@ -16,12 +16,24 @@ export const Cart = () => {
     }, 0) || 0; 
 
 
+    const handleDeleteItem = async (cartItemId) => {
+        try {
+            await deleteCartItem(cartItemId);
+            const updatedCartData = await getCartByUser();
+            setCartData(updatedCartData);
+        } catch (error) {
+            console.error("An error occurred while deleting the item:", error);
+        }
+    };
+    
+
+
     return (
         <Container className="lg (1024px)">
             <div className="text-2xl font-bold mb-6">Your Cart Has {cartData?.items?.length} Items</div>
                 {cartData && cartData.items && cartData.items.map(item => (
                     <Card key={item.collectible.id} style={{maxWidth: 840, maxHeight: 160}} size={3} 
-                    className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8" 
+                    className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8"
                     onClick={()=>{navigate(`/item/${item.collectible.id}`)}}>
                     <Flex align={"center"}>
                         <div style={{ flexBasis: '18%' }}>
@@ -47,7 +59,10 @@ export const Cart = () => {
                             <p>Quantity: {item.quantity}</p>
                             <p>Price: ${item.collectible.price}</p>
                         <div className="float-right">
-                            <Button variant="soft" color="red">
+                            <Button variant="soft" color="red"     
+                            onClick={(event) => {
+                            event.stopPropagation();
+                            handleDeleteItem(item.id);}}>
                                 Remove Item From Cart
                             </Button>
                         </div>
