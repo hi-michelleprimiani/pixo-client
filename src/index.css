@@ -21,9 +21,9 @@
 }
 
 .label-form {
-    @apply block text-lg font-bold text-gray-700 leading-tight
+  @apply block text-lg font-bold text-gray-700 leading-tight;
 }
 
 .div-form-center {
-    @apply text-xl font-bold text-center mb-6 
+  @apply text-xl font-bold text-center mb-6;
 }

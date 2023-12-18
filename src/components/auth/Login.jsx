@@ -18,7 +18,7 @@ export const Login = ({ setToken, setCurrentUserId }) => {
     loginUser(user).then((authInfo) => {
       if (authInfo && authInfo.token) {
         setToken(authInfo.token);
-        setCurrentUserId(authInfo.user_id)
+        setCurrentUserId(authInfo.user_id);
         navigate("/");
       } else {
         setIsUnsuccessful(true);

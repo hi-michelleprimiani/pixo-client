@@ -14,16 +14,26 @@ export const NavBar = ({ userId, setToken }) => {
     <nav className="m-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* Pixo Link on the left */}
-          <NavLink to="/" className="flex-shrink-0 flex items-center text-black hover:text-green">
+          <NavLink
+            to="/"
+            className="flex-shrink-0 flex items-center text-black hover:text-green"
+          >
             <span className="text-2xl font-bold">Pixo</span>
           </NavLink>
 
           {/* Right-aligned items */}
           <div className="flex items-center">
-            {/* Profile Dropdown */}
-            <ProfileDropDown userId={userId} pixoUser={pixoUser} setToken={setToken}/>
-            {/* Shopping Cart Icon */}
+            <NavLink
+              to="/messages"
+              className="text-black hover:text-green mr-8"
+            >
+              <i className="fa-regular fa-message fa-lg"></i>
+            </NavLink>
+            <ProfileDropDown
+              userId={userId}
+              pixoUser={pixoUser}
+              setToken={setToken}
+            />
             <NavLink to="/cart" className="text-black hover:text-green ml-8">
               <i className="fas fa-shopping-cart fa-lg"></i>
             </NavLink>
