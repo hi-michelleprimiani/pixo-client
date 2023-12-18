@@ -8,15 +8,22 @@ import { HeartFilledIcon, AvatarIcon } from '@radix-ui/react-icons'
 export const CollectibleDetails = () => {
   const [chosenCollectible, setChosenCollectible] = useState({});
   const { itemId } = useParams();
+  const [sellerUserId, setSellerUserId] = useState(null);
   const initialItemState = {
     collectible: itemId,
     quantity: 1
   }
   const navigate = useNavigate()
+  const loggedInUserId = localStorage.getItem("user_id")
 
   useEffect(() => {
-    getCollectibleById(itemId).then(setChosenCollectible);
+    getCollectibleById(itemId).then(data => {
+      setChosenCollectible(data);
+      setSellerUserId(data.seller?.id);
+    });
   }, [itemId]);
+
+  const isOwnCollectible = sellerUserId == parseInt(loggedInUserId);
 
   const addItemToCart = async(evt) => {
     evt.preventDefault()
@@ -64,26 +71,32 @@ export const CollectibleDetails = () => {
           <div className="whitespace-pre-wrap">{chosenCollectible.description}</div>
 
         </div>
-        <div className="flex items-center mb-4">
-          <Avatar
-            onClick={handleAvatarClick}
-            fallback={chosenCollectible.seller?.user.first_name}
-            src={chosenCollectible.seller?.img_url}
-            >
-          </Avatar>
-          <div className="ml-2">
-            <p>{chosenCollectible.seller?.user.first_name} {chosenCollectible.seller?.user.last_name} - User Rating</p>
+        <div className="flex items-center mb-4 justify-between">
+  <div className="flex items-center">
+    <Avatar
+      onClick={handleAvatarClick}
+      fallback={chosenCollectible.seller?.user.first_name}
+      src={chosenCollectible.seller?.img_url}
+    />
+    <div className="ml-2">
+      <p>{chosenCollectible.seller?.user.first_name} {chosenCollectible.seller?.user.last_name}</p>
+    </div>
+  </div>
+  {!isOwnCollectible && (
+          <div>
+            <Button variant="outline"><AvatarIcon/>Message Seller</Button>
           </div>
-          <div className="ml-10">
-        <Button variant="outline"><AvatarIcon/>Message Seller</Button>
-          </div>
-        </div>
+        )}
+      </div>
+
+      {!isOwnCollectible && (
         <div className="mb-2 text-center flex flex-row justify-center">
-        <Button onClick={addItemToCart} >Add To Cart</Button>
-        <div className="ml-5">
-        <Button><HeartFilledIcon/>Add To Favorites</Button>
+          <Button onClick={addItemToCart}>Add To Cart</Button>
+          <div className="ml-5">
+            <Button><HeartFilledIcon/>Add To Favorites</Button>
+          </div>
         </div>
-        </div>
+      )}
         <div>
         <Tabs.Root defaultValue="materials">
           <Tabs.List>
