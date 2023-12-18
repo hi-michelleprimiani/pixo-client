@@ -31,6 +31,10 @@ export const CollectibleDetails = () => {
     navigate("/cart")
   }
 
+  const handleAvatarClick = () => {
+      navigate(`/profile/${chosenCollectible.seller?.id}`);
+    }
+
   return (
     <Container className="lg (1024px)">
     <Box size={2} className="flex justify-between mb-28">
@@ -62,6 +66,7 @@ export const CollectibleDetails = () => {
         </div>
         <div className="flex items-center mb-4">
           <Avatar
+            onClick={handleAvatarClick}
             fallback={chosenCollectible.seller?.user.first_name}
             src={chosenCollectible.seller?.img_url}
             >
