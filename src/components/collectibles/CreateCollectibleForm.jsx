@@ -6,8 +6,7 @@ import { FormInput } from "../utils/FormInput"
 import { getAllCategories } from "../managers/CategoriesManager"
 
 
-
-export const CreateCollectibleForm = () => {
+export const CreateCollectibleForm = ( {userId}) => {
     const initItemState = {
         name: "",
         description: "",
@@ -16,12 +15,10 @@ export const CreateCollectibleForm = () => {
         color: "",
         size: ""
     }
-    const initImageState1 = ""
-    const initImageState2 = ""
-    const initImageState3 = ""
-    const [image1, updateImage1] = useState(initImageState1)
-    const [image2, updateImage2] = useState(initImageState2)
-    const [image3, updateImage3] = useState(initImageState3)
+    const initImageState = ""
+    const [image1, updateImage1] = useState(initImageState)
+    const [image2, updateImage2] = useState(initImageState)
+    const [image3, updateImage3] = useState(initImageState)
     const imagesArray = [
         image1,
         image2,
@@ -58,9 +55,8 @@ export const CreateCollectibleForm = () => {
             body: JSON.stringify({...item, images: imagesObjectsArray, categories: Array.from(chosenCategories)})
         })
         await getAllCollectiblesAndUser()
-        navigate("/profile")
+        navigate(`/profile/${userId}`)
     }
-
 
     const handleCategoryChosen = (category) => {
         const copy = new Set(chosenCategories)
