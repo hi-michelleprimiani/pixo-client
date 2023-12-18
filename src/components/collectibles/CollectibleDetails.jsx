@@ -5,15 +5,15 @@ import { Avatar, Button, Box, Container, Tabs, Text } from "@radix-ui/themes";
 import { HeartFilledIcon, AvatarIcon } from "@radix-ui/react-icons";
 
 export const CollectibleDetails = () => {
-  const [chosenCollectible, setChosenCollectible] = useState({});
   const { itemId } = useParams();
+  const [chosenCollectible, setChosenCollectible] = useState({});
   const [sellerUserId, setSellerUserId] = useState(null);
   const initialItemState = {
     collectible: itemId,
     quantity: 1,
   };
-  const navigate = useNavigate();
   const loggedInUserId = localStorage.getItem("user_id");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCollectibleById(itemId).then((data) => {
@@ -40,6 +40,8 @@ export const CollectibleDetails = () => {
   const handleAvatarClick = () => {
     navigate(`/profile/${chosenCollectible.seller?.id}`);
   };
+
+  
 
   return (
     <Container className="lg (1024px)">
@@ -110,7 +112,7 @@ export const CollectibleDetails = () => {
               </div>
             </div>
           )}
-          <div>
+          <div className="">
             <Tabs.Root defaultValue="materials">
               <Tabs.List>
                 <Tabs.Trigger value="materials">Materials</Tabs.Trigger>
