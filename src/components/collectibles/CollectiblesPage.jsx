@@ -22,6 +22,8 @@ export const CollectiblesPage = () => {
     getAllCategories().then(setCategories);
   }, []);
 
+
+  
   useEffect(() => {
     if (selectedCategory === 'all') {
       setFilteredItems(collectibles);
@@ -38,14 +40,18 @@ export const CollectiblesPage = () => {
   }, [selectedCategory, collectibles]);
 
 
+
+
+ //? Fisher-Yates Shuffle Algorithm, Knuth Shuffle. Used to randomly shuffle the elements of an array. 
+ //? the Fisher-Yates Shuffle algorithm iterates over the array from the end to the beginning, swapping each element with another randomly chosen element that comes before it (or could be itself). 
   const shuffleArray = (array) => {
     let currentIndex = array.length, randomIndex;
-    // While there remain elements to shuffle...
+    // as long as the currentIndex is not 0, the while loop will run. 
     while (currentIndex !== 0) {
-      // Pick a remaining element...
+      // Math.random generates a random floating-point number between 0 & 1, multiplies by currentIndex and math. Floor rounds down to the nearest whole number. 
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
-      // And swap it with the current element.
+      // Swap operation. It uses array destructuring to swap the elements. 
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }

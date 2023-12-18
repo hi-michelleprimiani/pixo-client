@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../managers/AuthManager";
 import { Button } from "@radix-ui/themes";
+import { FormInput } from "../utils/FormInput";
 
 export const Register = ({ setToken, setCurrentUserId }) => {
   const [formData, setFormData] = useState({
