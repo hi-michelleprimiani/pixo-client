@@ -4,8 +4,15 @@ Pixo is an online marketplace for sellers of handmade and curated items. Designe
 
 ## Description 
 
-- Pixo is a simple and intuitive interface that allows sellers to easily create detailed product listings with images, descriptions and prices.
-- Features include - filtering by category, adding items to cart, a basic messaging system, items detail page, profile view.
+The Pixo App front-end is designed to be user-friendly, providing collectors with an easy-to-navigate interface for browsing, sharing, and managing their collectible items. Built with Javascript, React, Tailwind and Radix, it features responsive design, interactive elements, and seamless integration with the Pixo App back-end services.
+
+## Features
+
+- **Browse Collectibles:** View a curated list of collectibles.
+- **Filter By Category**: Easy to use filter bar to help you find items more directly.
+- **User Profiles:** View and edit user profiles, showcasing user collections.
+- **Messaging System**: A basic messaging system to be able to ask and answer any questions relating to items.
+- **Responsive Design:** Accessible on various devices and screen sizes.
 
 ### Dependencies 
 
@@ -19,3 +26,6 @@ Pixo is an online marketplace for sellers of handmade and curated items. Designe
 - cd to ```pixo-client```
 - npm install
 - npm run dev
+
+### Acknowledgements
+- Inspired by the creativity and community-driven aspect of Etsy, this project aims to provide a similar platform for collectible enthusiasts.
