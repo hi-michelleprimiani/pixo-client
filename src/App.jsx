@@ -4,8 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 //! Import NavBar !! import { NavBar } from "./components/nav/NavBar";
 //! Invoke right about appviews on line 29
 
-
-
 function App() {
   const [token, setTokenState] = useState(localStorage.getItem("auth_token"));
   const [userId, setUserId] = useState(localStorage.getItem("user_id"));
