@@ -22,10 +22,10 @@ export const Register = ({ setToken, setCurrentUserId }) => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [id]: value,
     }));
   };
 
@@ -67,116 +67,49 @@ export const Register = ({ setToken, setCurrentUserId }) => {
         <form onSubmit={handleRegister}>
           <div className="mb-4">
             <label className="block text-gray-700">First Name</label>
-            <input
-              className="input"
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              required
-              autoFocus
-            />
+            <FormInput type="text" id="firstName" value={formData.firstName} onChange={handleInputChange} required autoFocus/>
           </div>
-
           <div className="mb-4">
             <label className="block text-gray-700">Last Name</label>
-            <input
-              className="input"
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="text" id="lastName" value={formData.lastName} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
-            <input
-              className="input"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="email" id="email" value={formData.email} onChange={handleInputChange} required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Username</label>
-            <input
-              className="input"
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="text" id="username" value={formData.username} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
-            <input
-              className="input"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="password" id="password" value={formData.password} onChange={handleInputChange} required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Verify Password</label>
-            <input
-              className="input"
-              type="password"
-              name="verifyPassword"
-              value={formData.verifyPassword}
-              onChange={handleInputChange}
-              required
-            />
-            {matchUnsuccessful && (
-              <p className="text-red-500 text-center">
-                Password does not match
-              </p>
-            )}
+            <FormInput type="password" id="verifyPassword" value={formData.verifyPassword} onChange={handleInputChange} required />
+    {matchUnsuccessful && (
+      <p className="text-red-500 text-center">Password does not match</p>
+    )}
           </div>
 
           <div className="mb-4 whitespace-pre-wrap">
             <label className="block text-gray-700">
               Tell Us About Yourself
             </label>
-            <textarea
-              className="input"
-              type="text"
-              name="bio"
-              value={formData.bio}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="textarea" id="bio" value={formData.bio} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Location</label>
-            <input
-              className="input"
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="text" id="location" value={formData.location} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Profile Picture</label>
-            <input
-              className="input"
-              type="text"
-              name="imgurl"
-              value={formData.imgurl}
-              onChange={handleInputChange}
-              required
-            />
+      <FormInput type="text" id="imgurl" value={formData.imgurl} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">

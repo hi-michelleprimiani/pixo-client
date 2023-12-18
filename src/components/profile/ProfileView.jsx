@@ -19,9 +19,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteCollectible } from "../managers/CollectibleManager";
 
 export const ProfileView = () => {
+    const { userId } = useParams();
   const [getUser, setUser] = useState([]);
   const navigate = useNavigate();
-  const { userId } = useParams();
   const loggedInUserId = localStorage.getItem("user_id");
 
   useEffect(() => {
