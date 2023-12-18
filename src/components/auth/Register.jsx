@@ -71,103 +71,45 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Last Name</label>
-            <input
-              className="input"
-              type="text"
-              id="lastName"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="text" id="lastName" value={formData.lastName} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
-            <input
-              className="input"
-              type="email"
-              id="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="email" id="email" value={formData.email} onChange={handleInputChange} required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Username</label>
-            <input
-              className="input"
-              type="text"
-              id="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="text" id="username" value={formData.username} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
-            <input
-              className="input"
-              type="password"
-              id="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="password" id="password" value={formData.password} onChange={handleInputChange} required />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Verify Password</label>
-            <input
-              className="input"
-              type="password"
-              id="verifyPassword"
-              value={formData.verifyPassword}
-              onChange={handleInputChange}
-              required
-            />
-            {matchUnsuccessful && (
-              <p className="text-red-500 text-center">
-                Password does not match
-              </p>
-            )}
+            <FormInput type="password" id="verifyPassword" value={formData.verifyPassword} onChange={handleInputChange} required />
+    {matchUnsuccessful && (
+      <p className="text-red-500 text-center">Password does not match</p>
+    )}
           </div>
 
           <div className="mb-4 whitespace-pre-wrap">
             <label className="block text-gray-700">
               Tell Us About Yourself
             </label>
-            <textarea
-              className="input"
-              type="text"
-              id="bio"
-              value={formData.bio}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="textarea" id="bio" value={formData.bio} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Location</label>
-            <input
-              className="input"
-              type="text"
-              id="location"
-              value={formData.location}
-              onChange={handleInputChange}
-              required
-            />
+            <FormInput type="text" id="location" value={formData.location} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Profile Picture</label>
-            <input
-              className="input"
-              type="text"
-              id="imgurl"
-              value={formData.imgurl}
-              onChange={handleInputChange}
-              required
-            />
+      <FormInput type="text" id="imgurl" value={formData.imgurl} onChange={handleInputChange} required />
           </div>
 
           <div className="mb-4">
