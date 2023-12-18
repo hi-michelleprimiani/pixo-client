@@ -1,8 +1,21 @@
-# React + Vite
+# Pixo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pixo is an online marketplace for sellers of handmade and curated items. Designed for artisans, crafters and collectors to list and sell their items. By providing a user-friendly and visually appealing marketplace, Pixo aims to empower sellers to reach a broader customer base and showcase their unique creations.
 
-Currently, two official plugins are available:
+## Description 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Pixo is a simple and intuitive interface that allows sellers to easily create detailed product listings with images, descriptions and prices.
+- Features include - filtering by category, adding items to cart, a basic messaging system, items detail page, profile view.
+
+### Dependencies 
+
+- Front End - Javascript/React
+- CSS - Tailwind & Radix
+- Back End - Django
+
+## Installing
+
+- git clone ```git@github.com:hi-michelleprimiani/pixo-client.git```
+- cd to ```pixo-client```
+- npm install
+- npm run dev
