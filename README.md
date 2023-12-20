@@ -20,6 +20,15 @@ The Pixo App front-end is designed to be user-friendly, providing collectors wit
 - CSS - Tailwind & Radix
 - Back End - Django
 
+## Screenshots
+![Screenshot 2023-12-20 at 12 46 29 PM](https://github.com/hi-michelleprimiani/pixo-client/assets/133997733/f956f6df-258f-4826-a09c-e5c264341a07)
+![Screenshot 2023-12-20 at 12 46 47 PM](https://github.com/hi-michelleprimiani/pixo-client/assets/133997733/75f77a54-79c1-4960-94b1-977d47b6b6eb)
+![Screenshot 2023-12-20 at 12 47 03 PM](https://github.com/hi-michelleprimiani/pixo-client/assets/133997733/099e6908-002b-4156-ab82-7fd8c3825991)
+![Screenshot 2023-12-20 at 12 47 18 PM](https://github.com/hi-michelleprimiani/pixo-client/assets/133997733/7a1d38fc-32a7-4f0e-bba8-87c526e0c029)
+![Screenshot 2023-12-20 at 12 47 28 PM](https://github.com/hi-michelleprimiani/pixo-client/assets/133997733/abe7ac7b-0da1-40f4-86d0-7ab2530ef7f8)
+
+
+
 ## Installing
 
 - git clone ```git@github.com:hi-michelleprimiani/pixo-client.git```
