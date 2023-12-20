@@ -11,6 +11,7 @@ export const CollectibleDetails = () => {
   const [sellerUserId, setSellerUserId] = useState(null);
   const loggedInUserId = localStorage.getItem("user_id");
   const [messageText, setMessageText] = useState(""); // Add this line to manage message text
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const initialItemState = {
     collectible: itemId,
     quantity: 1,
@@ -43,12 +44,11 @@ export const CollectibleDetails = () => {
     navigate(`/profile/${chosenCollectible.seller?.id}`);
   };
 
-  
   const handleSendMessage = async () => {
     if (messageText.trim() !== "") {
       const newMessage = {
-        sender: parseInt(loggedInUserId), // Logged-in user ID
-        receiver: sellerUserId, // Seller's user ID
+        sender: parseInt(loggedInUserId),
+        receiver: sellerUserId,
         text: messageText,
       };
 
@@ -64,7 +64,8 @@ export const CollectibleDetails = () => {
 
         if (response.ok) {
           setMessageText(""); // Clear the message input
-          // Add any additional actions you want to take after sending the message
+          setShowSuccessMessage(true); // Show success message
+          setTimeout(() => setShowSuccessMessage(false), 3000); // Hide the message after 3 seconds
         } else {
           throw new Error("Failed to send message");
         }

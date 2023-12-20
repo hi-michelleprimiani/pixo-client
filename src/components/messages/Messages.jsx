@@ -65,6 +65,34 @@ export const Messages = ({ userId }) => {
       }
     }
   };
+
+
+    // Function to handle message deletion
+    const handleDeleteMessage = async (messageId) => {
+      try {
+        const response = await fetch(`http://localhost:8000/messages/${messageId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Token ${localStorage.getItem("auth_token")}`,
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (response.ok) {
+          // Update state to remove the deleted message
+          const updatedConversations = { ...conversations };
+          for (const key in updatedConversations) {
+            updatedConversations[key].messages = updatedConversations[key].messages.filter(msg => msg.id !== messageId);
+          }
+          setConversations(updatedConversations);
+        } else {
+          throw new Error("Failed to delete message");
+        }
+      } catch (error) {
+        console.error("Error deleting message:", error);
+      }
+    };
+
   return (
     <div className="flex flex-col items-center my-4">
       <h2 className="text-2xl font-bold mb-4">Messages</h2>
@@ -95,6 +123,14 @@ export const Messages = ({ userId }) => {
                   <div className="font-semibold">
                     {message.sender.user.full_name}
                   </div>
+                  {message.sender.id === currentUserID && (
+                      <button
+                        className="text-red-500 text-sm"
+                        onClick={() => handleDeleteMessage(message.id)}
+                      >
+                        Delete
+                      </button>
+                    )}
                   <p className="text-sm text-gray-700 break-all">
                     {message.text}
                   </p>
