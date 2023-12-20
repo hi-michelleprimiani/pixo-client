@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { getCollectibleById } from "../managers/CollectibleManager";
 import { useNavigate, useParams } from "react-router-dom";
-import { Avatar, Button, Box, Container, Tabs, Text } from "@radix-ui/themes";
+import { Avatar, Button, Box, Container, Tabs, Text, Flex, TextArea } from "@radix-ui/themes";
 import { HeartFilledIcon, AvatarIcon } from "@radix-ui/react-icons";
+import * as Popover from '@radix-ui/react-popover';
 
 export const CollectibleDetails = () => {
   const { itemId } = useParams();
   const [chosenCollectible, setChosenCollectible] = useState({});
   const [sellerUserId, setSellerUserId] = useState(null);
+  const loggedInUserId = localStorage.getItem("user_id");
+  const [messageText, setMessageText] = useState(""); // Add this line to manage message text
   const initialItemState = {
     collectible: itemId,
     quantity: 1,
   };
-  const loggedInUserId = localStorage.getItem("user_id");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,6 +44,36 @@ export const CollectibleDetails = () => {
   };
 
   
+  const handleSendMessage = async () => {
+    if (messageText.trim() !== "") {
+      const newMessage = {
+        sender: parseInt(loggedInUserId),
+        receiver: sellerUserId,
+        text: messageText,
+      };
+
+      try {
+        const response = await fetch(`http://localhost:8000/messages`, {
+          method: "POST",
+          headers: {
+            Authorization: `Token ${localStorage.getItem("auth_token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newMessage),
+        });
+
+        if (response.ok) {
+          setMessageText(""); // Clear the message input
+        } else {
+          throw new Error("Failed to send message");
+        }
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+    }
+  };
+
+
 
   return (
     <Container className="lg (1024px)">
@@ -93,10 +125,38 @@ export const CollectibleDetails = () => {
             </div>
             {!isOwnCollectible && (
               <div>
-                <Button variant="outline">
+
+                <Popover.Root>
+                  <Popover.Trigger>
+                    <Button variant="soft">
+                      Message Seller
+                    </Button>
+                  </Popover.Trigger>
+                  <Popover.Content style={{ width: 360, zIndex: 1000, backgroundColor: 'white' }}>
+                    <Flex gap="3">
+                      <Box grow="1">
+                        <Text>Message</Text>
+                        <TextArea
+                          placeholder="Write a message..."
+                          value={messageText} // Set the value from state
+                          onChange={(e) => setMessageText(e.target.value)}
+                          style={{ height: 80 }}
+                        />
+                        <Flex gap="3" mt="3" justify="between">
+                          <Flex align="center" gap="2" asChild></Flex>
+                          <Popover.Close>
+                            <Button size="1" onClick={handleSendMessage}>Send</Button>
+                          </Popover.Close>
+                        </Flex>
+                      </Box>
+                    </Flex>
+                  </Popover.Content>
+                </Popover.Root>
+
+                {/* <Button variant="outline">
                   <AvatarIcon />
                   Message Seller
-                </Button>
+                </Button> */}
               </div>
             )}
           </div>
