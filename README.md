@@ -1,6 +1,6 @@
 # Pixo - Client
 
-Pixo is an online marketplace for sellers of handmade and curated items. Designed for artisans, crafters and collectors to list and sell their items. By providing a user-friendly and visually appealing marketplace, Pixo aims to empower sellers to reach a broader customer base and showcase their unique creations. Loom Video Walkthru coming soon
+Pixo is an online marketplace for sellers of handmade and curated items. Designed for artisans, crafters and collectors to list and sell their items. By providing a user-friendly and visually appealing marketplace, Pixo aims to empower sellers to reach a broader customer base and showcase their unique creations. 
 
 ## Description 
 
