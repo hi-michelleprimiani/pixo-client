@@ -18,10 +18,13 @@ export const Cart = () => {
     getCartByUser().then(setCartData);
   }, []);
 
-  const totalPrice =
-    cartData?.items?.reduce((total, item) => {
-      return total + item.quantity * parseFloat(item.collectible.price);
-    }, 0) || 0;
+  const totalPrice = cartData?.items?.reduce((total, item) => {
+    const pricePerItem = parseFloat(item.collectible.price);
+    const taxPerItem = pricePerItem * 0.04;
+    const totalCostPerItem = (pricePerItem + taxPerItem) * item.quantity;
+    return total + totalCostPerItem;
+  }, 0) || 0;
+  
 
   const handleDeleteItem = async (cartItemId) => {
     try {
@@ -73,7 +76,7 @@ export const Cart = () => {
               <div style={{ flexBasis: "82%", padding: "20px" }}>
                 <h2 className="text-xl font-bold">{item.collectible.name}</h2>
                 <p>Quantity: {item.quantity}</p>
-                <p>Price: ${item.collectible.price}</p>
+                <p>Price: ${item.collectible.price} + Tax ${ (item.collectible.price * item.quantity * 0.04).toFixed(2) }</p>
                 <div className="float-right">
                   <Button
                     variant="soft"

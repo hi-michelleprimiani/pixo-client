@@ -118,8 +118,7 @@ export const CollectibleDetails = () => {
               />
               <div className="ml-2">
                 <p>
-                  {chosenCollectible.seller?.user.first_name}{" "}
-                  {chosenCollectible.seller?.user.last_name}
+                  {chosenCollectible.seller?.user?.username}
                 </p>
               </div>
             </div>
@@ -132,16 +131,16 @@ export const CollectibleDetails = () => {
                       Message Seller
                     </Button>
                   </Popover.Trigger>
-                  <Popover.Content style={{ width: 360, zIndex: 1000, backgroundColor: 'white' }}>
+                  <Popover.Content style={{ width: 360, zIndex: 1000, backgroundColor: 'white', padding: 10, border: '1px solid lightgray', borderRadius: '10px', margin: 10 }}>
                     <Flex gap="3">
                       <Box grow="1">
-                        <Text>Message</Text>
+                        <Text>Your message to {chosenCollectible.seller?.user?.first_name} at {chosenCollectible.seller?.user?.username}</Text>
                         <TextArea
                           placeholder="Write a message..."
-                          value={messageText} // Set the value from state
+                          value={messageText} 
                           onChange={(e) => setMessageText(e.target.value)}
                           style={{ height: 80 }}
-                        />
+                          />
                         <Flex gap="3" mt="3" justify="between">
                           <Flex align="center" gap="2" asChild></Flex>
                           <Popover.Close>
@@ -152,11 +151,6 @@ export const CollectibleDetails = () => {
                     </Flex>
                   </Popover.Content>
                 </Popover.Root>
-
-                {/* <Button variant="outline">
-                  <AvatarIcon />
-                  Message Seller
-                </Button> */}
               </div>
             )}
           </div>
