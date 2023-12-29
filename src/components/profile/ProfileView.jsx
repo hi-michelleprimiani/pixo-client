@@ -59,7 +59,7 @@ export const ProfileView = () => {
                 <Text as="div" size="2" color="gray">
                   {getUser.user?.username} - {getUser.location}
                 </Text>
-                <Text as="div" size="3">
+                <Text as="div" size="3" className="whitespace-pre-wrap">
                   {getUser.bio}
                 </Text>
               </Box>
