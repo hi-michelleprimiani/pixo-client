@@ -50,7 +50,7 @@ export const ApplicationViews = ({
           path="/edit/:itemId"
           element={<EditCollectibleForm userId={userId} />}
         />
-        <Route path="/cart" element={<Cart userId={userId} />} />
+        <Route path="/cart" element={<Cart userId={userId} token={token}/>} />
         <Route path="/messages" element={<Messages userId={userId} />} />
       </Route>
     </Routes>
