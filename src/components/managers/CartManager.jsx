@@ -26,6 +26,7 @@ export const deleteCartItem = async (cartItemId) => {
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_token")}`,
         "Content-Type": "application/json",
+        
       },
     },
   );
