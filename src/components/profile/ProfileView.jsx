@@ -17,16 +17,20 @@ import {
 } from "@radix-ui/themes";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteCollectible } from "../managers/CollectibleManager";
+import { getPaidCart } from "../managers/CartManager";
 
 export const ProfileView = () => {
     const { userId } = useParams();
   const [getUser, setUser] = useState([]);
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
   const navigate = useNavigate();
   const loggedInUserId = localStorage.getItem("user_id");
 
   useEffect(() => {
     getPixoUserAndCollectiblesById(userId).then(setUser);
+    getPaidCart().then(setPurchaseHistory);
   }, [userId]);
+  
 
   const handleDeleteCollectible = async (itemId) => {
     try {
@@ -168,6 +172,27 @@ export const ProfileView = () => {
             </Card>
           ))}
         </Grid>
+        <div className="text-xl font-bold mb-3">Purchase History</div>
+{purchaseHistory.map(cart => (
+  <div key={cart.id} className="mb-4">
+    <div className="font-bold">Purchase Date: {cart.purchase_date || 'Not Available'}</div>
+    <div className="mt-2">
+      {cart.items.map(item => (
+        <div key={item.id} className="border p-2 mt-2">
+          <div className="font-bold">{item.collectible.name}</div>
+          <div>Price: ${item.collectible.price}</div>
+          <div>Quantity: {item.quantity}</div>
+          <img 
+            src={item.collectible.images[0]?.img_url} 
+            alt={item.collectible.name} 
+            style={{ width: '100px', height: '100px', objectFit: 'cover' }} 
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+))}
+
       </Container>
     </>
   );

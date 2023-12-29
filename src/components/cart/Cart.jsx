@@ -10,7 +10,7 @@ import {
   Inset,
 } from "@radix-ui/themes";
 
-export const Cart = ( {token}) => {
+export const Cart = ( {token, userId}) => {
   const [cartData, setCartData] = useState(null);
   const [cartId, setCartId] = useState(null)
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const Cart = ( {token}) => {
   useEffect(() => {
     getCartByUser().then(data => {
       setCartData(data);
-      setCartId(data.id); // Extract and set the cart ID here
+      setCartId(data.id); 
     });
   }, []);
 
@@ -44,6 +44,7 @@ const handlePurchaseClick = async () => {
 
       if (response.ok) {
         console.log('Purchase successful');
+        navigate(`/profile/${userId}`);
         // Handle successful purchase here
       } else {
         console.error('Purchase failed', response);
