@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { getAllCollectiblesAndUser } from "../managers/CollectibleManager";
 import { getAllCategories } from "../managers/CategoriesManager";
-import { CategoryFilter } from "./CategoryFilter";
 import { CollectiblesList } from "./CollectiblesList";
+import { CategoryAndSearchFilter } from "./CategoryAndSearchFilter";
 
 export const CollectiblesPage = () => {
   const [collectibles, setCollectibles] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredCollectibles, setFilteredItems] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(""); // New state for search query
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     getAllCollectiblesAndUser().then((data) => {
@@ -29,7 +29,6 @@ export const CollectiblesPage = () => {
         collectible.categories.includes(selectedCategoryId),
       );
     }
-
     // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter((collectible) =>
@@ -61,23 +60,17 @@ export const CollectiblesPage = () => {
         array[currentIndex],
       ];
     }
-
     return array;
   };
 
   return (
     <>
-      <CategoryFilter
+      <CategoryAndSearchFilter
         categories={categories}
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
-      />
-            {/* Search Bar */}
-            <input
-        type="text"
-        placeholder="Search Collectibles"
-        value={searchQuery}
-        onChange={handleSearchChange}
+        searchQuery={searchQuery}
+        handleSearchChange={handleSearchChange}
       />
       <CollectiblesList collectibles={filteredCollectibles} />
     </>
