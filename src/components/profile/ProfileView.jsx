@@ -18,6 +18,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteCollectible } from "../managers/CollectibleManager";
 import { getPaidCart } from "../managers/CartManager";
+import { PurchaseHistory } from "./PurchaseHistory";
 
 export const ProfileView = () => {
     const { userId } = useParams();
@@ -69,7 +70,9 @@ export const ProfileView = () => {
               </Box>
             </Flex>
 
-            {userId === loggedInUserId && (
+            {/*Edit Profile Button*/}
+
+            {/* {userId === loggedInUserId && (
               <div className="edit button">
                 <Popover.Root>
                   <Popover.Trigger>
@@ -96,11 +99,12 @@ export const ProfileView = () => {
                   </Popover.Content>
                 </Popover.Root>
               </div>
-            )}
+            )} */}
           </Card>
         </div>
 
         <div className="text-xl font-bold mb-3">Current Listed Items</div>
+        {getUser.collectible && getUser.collectible.length > 0 ? (
         <Grid columns="4" gap="4" width="auto">
           {getUser.collectible?.map((item) => (
             <Card
@@ -172,27 +176,11 @@ export const ProfileView = () => {
             </Card>
           ))}
         </Grid>
-        <div className="text-xl font-bold mb-3">Purchase History</div>
-{purchaseHistory.map(cart => (
-  <div key={cart.id} className="mb-4">
-    <div className="font-bold">Purchase Date: {cart.purchase_date || 'Not Available'}</div>
-    <div className="mt-2">
-      {cart.items.map(item => (
-        <div key={item.id} className="border p-2 mt-2">
-          <div className="font-bold">{item.collectible.name}</div>
-          <div>Price: ${item.collectible.price}</div>
-          <div>Quantity: {item.quantity}</div>
-          <img 
-            src={item.collectible.images[0]?.img_url} 
-            alt={item.collectible.name} 
-            style={{ width: '100px', height: '100px', objectFit: 'cover' }} 
-          />
-        </div>
-      ))}
-    </div>
-  </div>
-))}
+        ) : (
+          <p>You have not listed any items yet.</p>
+      )}
 
+        <PurchaseHistory purchaseHistory={purchaseHistory} />
       </Container>
     </>
   );
