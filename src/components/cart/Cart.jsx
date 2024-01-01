@@ -81,8 +81,8 @@ const handlePurchaseClick = async () => {
           <Card
             key={item.collectible.id}
             style={{ maxWidth: 840, maxHeight: 160 }}
-            size={3}
-            className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8"
+            size="3"
+            className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8" 
             onClick={() => {
               navigate(`/item/${item.collectible.id}`);
             }}
