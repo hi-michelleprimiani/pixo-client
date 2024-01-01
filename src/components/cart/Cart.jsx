@@ -3,6 +3,7 @@ import { deleteCartItem, getCartByUser } from "../managers/CartManager";
 import { useNavigate } from "react-router-dom";
 import {
   AspectRatio,
+  Avatar,
   Button,
   Card,
   Container,
@@ -80,36 +81,28 @@ const handlePurchaseClick = async () => {
         cartData.items.map((item) => (
           <Card
             key={item.collectible.id}
-            style={{ maxWidth: 840, maxHeight: 160 }}
             size="3"
-            className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8" 
+            className="cursor-pointer hover:shadow-lg transition-shadow flex mb-6 max-w-3xl max-h-40"
             onClick={() => {
               navigate(`/item/${item.collectible.id}`);
             }}
           >
-            <Flex align={"center"}>
-              <div style={{ flexBasis: "18%" }}>
-                <Inset clip="padding-box" side="left" pb="current">
+            <Flex align="center">
+              <div className="flex-none w-1/5">
                   <AspectRatio ratio={1 / 1}>
                     {item.collectible.images &&
                       item.collectible.images.length > 0 && (
-                        <img
+                        <Avatar
                           src={item.collectible.images[0].img_url}
                           alt={item.collectible.name}
-                          style={{
-                            display: "block",
-                            objectFit: "cover",
-                            width: "100%",
-                            height: "100%",
-                          }}
+                          radius="small"
+                          size="8"
                         />
                       )}
                   </AspectRatio>
-                </Inset>
               </div>
-              <div style={{ flexBasis: "82%", padding: "20px" }}>
+              <div className="flex-grow p-5">
                 <h2 className="text-xl font-bold">{item.collectible.name}</h2>
-                <p>Quantity: {item.quantity}</p>
                 <p>Price: ${item.collectible.price} + Tax ${ (item.collectible.price * item.quantity * 0.04).toFixed(2) }</p>
                 <div className="float-right">
                   <Button
@@ -127,11 +120,11 @@ const handlePurchaseClick = async () => {
             </Flex>
           </Card>
         ))}
-        <div>
-        <button onClick={handlePurchaseClick}>Purchase</button>
-        </div>
-      <div className="text-2xl font-bold mb-6 float-right">
+      <div>
+        <Button size="3" onClick={handlePurchaseClick}>Purchase</Button>
+        <div className="text-2xl font-bold mb-20 float-right">
         Total: ${totalPrice.toFixed(2)}{" "}
+        </div>
       </div>
 
     </Container>

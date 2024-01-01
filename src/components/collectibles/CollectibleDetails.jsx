@@ -86,14 +86,7 @@ export const CollectibleDetails = () => {
                 key={image.id}
                 src={image.img_url}
                 alt={chosenCollectible.name}
-                style={{
-                  display: "block",
-                  objectFit: "cover",
-                  width: "60%",
-                  height: "100%",
-                  backgroundColor: "var(--gray-5)",
-                  margin: "10px",
-                }}
+                className="block object-cover w-3/5 h-full bg-gray-500 m-2.5 rounded-lg"
               />
             ))}
         </Box>
