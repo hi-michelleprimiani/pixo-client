@@ -17,16 +17,21 @@ import {
 } from "@radix-ui/themes";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteCollectible } from "../managers/CollectibleManager";
+import { getPaidCart } from "../managers/CartManager";
+import { PurchaseHistory } from "./PurchaseHistory";
 
 export const ProfileView = () => {
     const { userId } = useParams();
   const [getUser, setUser] = useState([]);
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
   const navigate = useNavigate();
   const loggedInUserId = localStorage.getItem("user_id");
 
   useEffect(() => {
     getPixoUserAndCollectiblesById(userId).then(setUser);
+    getPaidCart().then(setPurchaseHistory);
   }, [userId]);
+  
 
   const handleDeleteCollectible = async (itemId) => {
     try {
@@ -59,13 +64,15 @@ export const ProfileView = () => {
                 <Text as="div" size="2" color="gray">
                   {getUser.user?.username} - {getUser.location}
                 </Text>
-                <Text as="div" size="3">
+                <Text as="div" size="3" className="whitespace-pre-wrap">
                   {getUser.bio}
                 </Text>
               </Box>
             </Flex>
 
-            {userId === loggedInUserId && (
+            {/*Edit Profile Button*/}
+
+            {/* {userId === loggedInUserId && (
               <div className="edit button">
                 <Popover.Root>
                   <Popover.Trigger>
@@ -92,11 +99,12 @@ export const ProfileView = () => {
                   </Popover.Content>
                 </Popover.Root>
               </div>
-            )}
+            )} */}
           </Card>
         </div>
 
         <div className="text-xl font-bold mb-3">Current Listed Items</div>
+        {getUser.collectible && getUser.collectible.length > 0 ? (
         <Grid columns="4" gap="4" width="auto">
           {getUser.collectible?.map((item) => (
             <Card
@@ -168,6 +176,11 @@ export const ProfileView = () => {
             </Card>
           ))}
         </Grid>
+        ) : (
+          <p>You have not listed any items yet.</p>
+      )}
+
+        <PurchaseHistory purchaseHistory={purchaseHistory} />
       </Container>
     </>
   );

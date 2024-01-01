@@ -10,13 +10,18 @@ import {
   Inset,
 } from "@radix-ui/themes";
 
-export const Cart = () => {
+export const Cart = ( {token, userId}) => {
   const [cartData, setCartData] = useState(null);
+  const [cartId, setCartId] = useState(null)
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCartByUser().then(setCartData);
+    getCartByUser().then(data => {
+      setCartData(data);
+      setCartId(data.id); 
+    });
   }, []);
+
 
   const totalPrice = cartData?.items?.reduce((total, item) => {
     const pricePerItem = parseFloat(item.collectible.price);
@@ -25,6 +30,35 @@ export const Cart = () => {
     return total + totalCostPerItem;
   }, 0) || 0;
   
+const handlePurchaseClick = async () => {
+  if (cartId) {
+    try {
+      const response = await fetch(`http://localhost:8000/cart/${cartId}`, { // Use the cartId from the state
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`,
+        },
+        body: JSON.stringify({ paid: true }),
+      });
+
+      if (response.ok) {
+        console.log('Purchase successful');
+        navigate(`/profile/${userId}`);
+        // Handle successful purchase here
+      } else {
+        console.error('Purchase failed', response);
+        // Handle errors here
+      }
+    } catch (error) {
+      console.error('Network error', error);
+      // Handle network errors here
+    }
+  } else {
+    console.log('No cart ID available');
+  }
+};
+
 
   const handleDeleteItem = async (cartItemId) => {
     try {
@@ -93,9 +127,13 @@ export const Cart = () => {
             </Flex>
           </Card>
         ))}
+        <div>
+        <button onClick={handlePurchaseClick}>Purchase</button>
+        </div>
       <div className="text-2xl font-bold mb-6 float-right">
         Total: ${totalPrice.toFixed(2)}{" "}
       </div>
+
     </Container>
   );
 };

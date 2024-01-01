@@ -26,8 +26,20 @@ export const deleteCartItem = async (cartItemId) => {
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_token")}`,
         "Content-Type": "application/json",
+        
       },
     },
   );
   return response;
+};
+
+
+export const getPaidCart = async () => {
+  let url = `http://localhost:8000/cart?paid=true`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("auth_token")}`,
+    },
+  });
+  return await response.json();
 };
