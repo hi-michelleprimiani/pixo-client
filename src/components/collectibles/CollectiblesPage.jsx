@@ -9,6 +9,7 @@ export const CollectiblesPage = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredCollectibles, setFilteredItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // New state for search query
 
   useEffect(() => {
     getAllCollectiblesAndUser().then((data) => {
@@ -19,19 +20,30 @@ export const CollectiblesPage = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredItems(collectibles);
-    } else {
-      // Parse selectedCategory as an integer
+    let filtered = collectibles;
+
+    // Filter by category
+    if (selectedCategory !== "all") {
       const selectedCategoryId = parseInt(selectedCategory);
-      // Filter collectibles where the categories array includes the selectedCategoryId
-      const filtered = collectibles.filter((collectible) =>
+      filtered = filtered.filter((collectible) =>
         collectible.categories.includes(selectedCategoryId),
       );
-
-      setFilteredItems(filtered);
     }
-  }, [selectedCategory, collectibles]);
+
+    // Filter by search query
+    if (searchQuery) {
+      filtered = filtered.filter((collectible) =>
+        collectible.name.toLowerCase().includes(searchQuery.toLowerCase()) // Assuming 'name' is a property of collectible
+      );
+    }
+
+    setFilteredItems(filtered);
+  }, [selectedCategory, collectibles, searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
 
   //? Fisher-Yates Shuffle Algorithm, Knuth Shuffle. Used to randomly shuffle the elements of an array.
   //? the Fisher-Yates Shuffle algorithm iterates over the array from the end to the beginning, swapping each element with another randomly chosen element that comes before it (or could be itself).
@@ -59,6 +71,13 @@ export const CollectiblesPage = () => {
         categories={categories}
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
+      />
+            {/* Search Bar */}
+            <input
+        type="text"
+        placeholder="Search Collectibles"
+        value={searchQuery}
+        onChange={handleSearchChange}
       />
       <CollectiblesList collectibles={filteredCollectibles} />
     </>
