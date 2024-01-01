@@ -69,37 +69,7 @@ export const ProfileView = () => {
                 </Text>
               </Box>
             </Flex>
-
             {/*Edit Profile Button*/}
-
-            {/* {userId === loggedInUserId && (
-              <div className="edit button">
-                <Popover.Root>
-                  <Popover.Trigger>
-                    <Button variant="soft" className="float-right">
-                      Edit Profile
-                    </Button>
-                  </Popover.Trigger>
-                  <Popover.Content style={{ width: 360 }}>
-                    <Flex gap="3">
-                      <Box grow="1">
-                        <Text>Edit Profile</Text>
-                        <TextArea
-                          placeholder="Write a comment…"
-                          style={{ height: 80 }}
-                        />
-                        <Flex gap="3" mt="3" justify="between">
-                          <Flex align="center" gap="2" asChild></Flex>
-                          <Popover.Close>
-                            <Button size="1">Update Profile</Button>
-                          </Popover.Close>
-                        </Flex>
-                      </Box>
-                    </Flex>
-                  </Popover.Content>
-                </Popover.Root>
-              </div>
-            )} */}
           </Card>
         </div>
 
