@@ -37,7 +37,7 @@ export const ApplicationViews = ({
         }
       >
         <Route index element={<CollectiblesPage />} />
-        <Route path="/item/:itemId" element={<CollectibleDetails />} />
+        <Route path="/item/:itemId" element={<CollectibleDetails userId={userId} />} />
         <Route
           path="/profile/:userId"
           element={<ProfileView userId={userId} />}
