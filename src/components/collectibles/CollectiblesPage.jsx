@@ -11,6 +11,7 @@ export const CollectiblesPage = () => {
   const [filteredCollectibles, setFilteredItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+
   useEffect(() => {
     getAllCollectiblesAndUser().then((data) => {
       const shuffledCollectibles = shuffleArray([...data]);
@@ -21,7 +22,6 @@ export const CollectiblesPage = () => {
 
   useEffect(() => {
     let filtered = collectibles;
-
     // Filter by category
     if (selectedCategory !== "all") {
       const selectedCategoryId = parseInt(selectedCategory);
@@ -29,15 +29,15 @@ export const CollectiblesPage = () => {
         collectible.categories.includes(selectedCategoryId),
       );
     }
-    // Filter by search query
+    // Filter by search query. Checks to see if search query is entered 
     if (searchQuery) {
       filtered = filtered.filter((collectible) =>
-        collectible.name.toLowerCase().includes(searchQuery.toLowerCase()) // Assuming 'name' is a property of collectible
+        collectible.name.toLowerCase().includes(searchQuery.toLowerCase()) 
       );
     }
-
     setFilteredItems(filtered);
   }, [selectedCategory, collectibles, searchQuery]);
+
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
