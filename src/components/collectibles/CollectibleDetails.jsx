@@ -10,7 +10,7 @@ export const CollectibleDetails = () => {
   const [chosenCollectible, setChosenCollectible] = useState({});
   const [sellerUserId, setSellerUserId] = useState(null);
   const loggedInUserId = localStorage.getItem("user_id");
-  const [messageText, setMessageText] = useState(""); // Add this line to manage message text
+  const [messageText, setMessageText] = useState(""); 
   const initialItemState = {
     collectible: itemId,
     quantity: 1,

@@ -33,7 +33,7 @@ export const PurchaseHistory = ({ purchaseHistory }) => {
             <div className="text-xl font-bold mb-3 mt-14">Purchase History</div>
             {purchaseHistory.length > 0 ? (
             purchaseHistory.map(cart => (
-                <div key={cart.id} className="mb-4">
+                <div key={cart.id} className="mb-6">
                     <div className="font-bold">
                         Purchase Date: {cart.purchase_date ? formatDate(cart.purchase_date) : 'Not Available'} <br />
                         Total: ${calculateTotal(cart.items).toFixed(2)}
@@ -47,7 +47,7 @@ export const PurchaseHistory = ({ purchaseHistory }) => {
                                 <img 
                                     src={item.collectible.images[0]?.img_url} 
                                     alt={item.collectible.name} 
-                                    style={{ width: '100px', height: '100px', objectFit: 'cover' }} 
+                                    className="w-24 h-24 object-cover"
                                 />
                             </div>
                         ))}
