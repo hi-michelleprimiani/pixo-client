@@ -10,7 +10,7 @@ export const CategoryAndSearchFilter = ({
 }) => {
   return (
     <>
-      <div className="flex justify-between ml-auto mr-auto max-w-screen-lg mb-10">
+      <div className="flex justify-between ml-auto mr-auto max-w-screen-lg mb-8">
         <div className="flex-1">
           <Select.Root 
             size="3"

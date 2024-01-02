@@ -44,6 +44,7 @@ export const CreateCollectibleForm = ({ userId }) => {
 
   const postCollectible = async (evt) => {
     evt.preventDefault();
+
     await fetch(`http://localhost:8000/collectibles`, {
       method: "POST",
       headers: {
@@ -76,8 +77,8 @@ export const CreateCollectibleForm = ({ userId }) => {
   return (
     <>
       <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
-        <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-          <form className="space-y-3">
+        <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-3xl shadow-md">
+          <form className="space-y-3" onSubmit={postCollectible}>
             <h1 className="text-3xl font-bold text-center mb-6">
               Post New Item
             </h1>
@@ -85,7 +86,6 @@ export const CreateCollectibleForm = ({ userId }) => {
               Name
             </label>
             <FormInput
-              type="text"
               id="name"
               value={item.name}
               onChange={handleUserInput}
@@ -98,14 +98,11 @@ export const CreateCollectibleForm = ({ userId }) => {
               id="description"
               value={item.description}
               onChange={handleUserInput}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-              rows="4"
             />
             <label htmlFor="price" className="label-form">
               Price
             </label>
             <FormInput
-              type="text"
               id="price"
               value={item.price}
               onChange={handleUserInput}
@@ -114,7 +111,6 @@ export const CreateCollectibleForm = ({ userId }) => {
               Material
             </label>
             <FormInput
-              type="text"
               id="material"
               value={item.material}
               onChange={handleUserInput}
@@ -123,7 +119,6 @@ export const CreateCollectibleForm = ({ userId }) => {
               Color
             </label>
             <FormInput
-              type="text"
               id="color"
               value={item.color}
               onChange={handleUserInput}
@@ -132,7 +127,6 @@ export const CreateCollectibleForm = ({ userId }) => {
               Size
             </label>
             <FormInput
-              type="text"
               id="size"
               value={item.size}
               onChange={handleUserInput}
@@ -146,6 +140,7 @@ export const CreateCollectibleForm = ({ userId }) => {
                 type="url"
                 onChange={(e) => handleImageInput1(e)}
                 placeholder="first image"
+                required
               />
               <FormInput
                 id="image2"
@@ -175,7 +170,7 @@ export const CreateCollectibleForm = ({ userId }) => {
                 ))}
               </div>
             </div>
-            <Button type="submit" onClick={postCollectible}>
+            <Button type="submit">
               Post Item
             </Button>
           </form>

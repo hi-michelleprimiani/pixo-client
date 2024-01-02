@@ -19,6 +19,7 @@ export const FormInput = ({
             onChange={onChange}
             placeholder={placeholder}
             className="input"
+            required
           />
         </fieldset>
       );
@@ -56,12 +57,13 @@ export const FormInput = ({
         <fieldset className="fieldset">
           <input
             id={id}
-            type={type}
+            type="text"
             value={value}
             onChange={onChange}
             placeholder={placeholder}
             autoComplete="off"
             className="input"
+            required
           />
         </fieldset>
       );

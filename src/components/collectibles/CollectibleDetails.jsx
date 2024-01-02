@@ -97,9 +97,10 @@ export const CollectibleDetails = ( {userId} ) => {
             <div className="text-3xl font-bold mb-4">
               ${chosenCollectible.price}
             </div>
-            <div className="whitespace-pre-wrap">
-              {chosenCollectible.description}
-            </div>
+            <div className="whitespace-pre-wrap max-h-[700px] overflow-auto">
+            {chosenCollectible.description}
+          </div>
+
           </div>
           <div className="flex items-center mb-4 justify-between">
             <div className="flex items-center">
