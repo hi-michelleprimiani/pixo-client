@@ -69,64 +69,68 @@ const handlePurchaseClick = async () => {
     }
   };
 
-
   return (
     <Container className="lg:container lg:mx-auto px-4">
-      <div className="text-2xl font-bold mb-6">
-        Your Cart Has {cartData?.items?.length} Items
-      </div>
-      {cartData &&
-        cartData.items &&
-        cartData.items.map((item) => (
-          <Card
-            key={item.collectible.id}
-            className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8 max-w-[840px] max-h-[160px]" 
-            size={3}
-            onClick={() => {
-              navigate(`/item/${item.collectible.id}`);
-            }}
-          >
-            <Flex align="center" className="w-full">
-              <div className="flex-none w-[18%]"> 
-                <Inset clip="padding-box" side="left" pb="current">
-                  <AspectRatio ratio={1 / 1}>
-                    {item.collectible.images &&
-                      item.collectible.images.length > 0 && (
+      {cartData && cartData.items && cartData.items.length > 0 ? (
+        <>
+          <div className="text-2xl font-bold mb-6">
+            Your Cart Has {cartData.items.length} Items
+          </div>
+          {cartData.items.map((item) => (
+            <Card
+              key={item.collectible.id}
+              className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8 max-w-[840px] max-h-[160px]" 
+              size={3}
+              onClick={() => {
+                navigate(`/item/${item.collectible.id}`);
+              }}
+            >
+              <Flex align="center" className="w-full">
+                <div className="flex-none w-[18%]"> 
+                  <Inset clip="padding-box" side="left" pb="current">
+                    <AspectRatio ratio={1 / 1}>
+                      {item.collectible.images && item.collectible.images.length > 0 && (
                         <img
                           src={item.collectible.images[0].img_url}
                           alt={item.collectible.name}
                           className="block object-cover w-full h-full" 
                         />
                       )}
-                  </AspectRatio>
-                </Inset>
-              </div>
-              <div className="flex-grow p-5 w-[82%]"> 
-                <h2 className="text-xl font-bold">{item.collectible.name}</h2>
-                <p>Quantity: {item.quantity}</p>
-                <p>Price: ${item.collectible.price} + Tax ${ (item.collectible.price * item.quantity * 0.04).toFixed(2) }</p>
-                <div className="float-right">
-                  <Button
-                    variant="soft"
-                    color="red"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleDeleteItem(item.id);
-                    }}
-                  >
-                    Remove Item From Cart
-                  </Button>
+                    </AspectRatio>
+                  </Inset>
                 </div>
-              </div>
-            </Flex>
-          </Card>
-        ))}
-        <div className="mb-20">
-          <Button size="3" onClick={handlePurchaseClick}>Purchase</Button>
-          <div className="text-2xl font-bold mb-6 float-right">
-            Total: ${totalPrice.toFixed(2)}{" "}
+                <div className="flex-grow p-5 w-[82%]"> 
+                  <h2 className="text-xl font-bold">{item.collectible.name}</h2>
+                  <p>Quantity: {item.quantity}</p>
+                  <p>Price: ${item.collectible.price} + Tax ${ (item.collectible.price * item.quantity * 0.04).toFixed(2) }</p>
+                  <div className="float-right">
+                    <Button
+                      variant="soft"
+                      color="red"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleDeleteItem(item.id);
+                      }}
+                    >
+                      Remove Item From Cart
+                    </Button>
+                  </div>
+                </div>
+              </Flex>
+            </Card>
+          ))}
+          <div className="mb-20">
+            <Button size="3" onClick={handlePurchaseClick}>Purchase</Button>
+            <div className="text-2xl font-bold mb-6 float-right">
+              Total: ${totalPrice.toFixed(2)}
+            </div>
           </div>
+        </>
+      ) : (
+        <div className="text-2xl font-bold mb-6">
+          You have no items currently in your cart
         </div>
+      )}
     </Container>
   );
-}  
+      }  

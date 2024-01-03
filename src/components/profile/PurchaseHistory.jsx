@@ -55,7 +55,7 @@ export const PurchaseHistory = ({ purchaseHistory }) => {
                 </div>
             ))
                 ) : (
-                    <p>You have no previous orders.</p>
+                    <p className='mb-20'>You have no previous orders.</p>
                 )}
         </>
     );

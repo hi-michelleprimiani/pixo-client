@@ -148,8 +148,9 @@ export const ProfileView = () => {
         ) : (
           <p>You have not listed any items yet.</p>
       )}
-
+      {userId === loggedInUserId && (
         <PurchaseHistory purchaseHistory={purchaseHistory} />
+      )}
       </Container>
     </>
   );
