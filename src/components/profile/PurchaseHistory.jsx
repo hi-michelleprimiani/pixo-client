@@ -35,27 +35,6 @@ export const PurchaseHistory = ({ purchaseHistory }) => {
         setVisibleItemId(visibleItemId === itemId ? null : itemId); // Toggle visibility
     };
     
-    const addItemToCart = async (item) => {
-        await fetch(`http://localhost:8000/cartitems`, {
-          method: "POST",
-          headers: {
-            Authorization: `Token ${localStorage.getItem("auth_token")}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            collectible: item.collectible.id,
-            quantity: item.quantity,
-          }),
-        });
-      };
-      
-      
-    const handleReorder = async (items) => {
-        for (const item of items) {
-          await addItemToCart(item);
-        }
-        navigate('/cart')
-      };
       
 
     return (
@@ -63,7 +42,7 @@ export const PurchaseHistory = ({ purchaseHistory }) => {
             <div className="text-xl font-bold mb-3 mt-14">Purchase History</div>
             {purchaseHistory.length > 0 ? (
                 purchaseHistory.map(cart => (
-                    <div key={cart.id} className="mb-6">
+                    <div key={cart.id} className="mb-6" >
                         <div className="font-bold">
                             Purchase Date: {formatDate(cart.purchase_date)} <br />
                             Total: ${calculateTotal(cart.items).toFixed(2)}
@@ -73,23 +52,20 @@ export const PurchaseHistory = ({ purchaseHistory }) => {
                         >
                             View item details
                         </Button>
-                        <Button 
-                        variant='soft'
-                        onClick={() => handleReorder(cart.items)}
-                        className="ml-2"
-                        >
-                        Reorder
-                        </Button>
                         {visibleItemId === cart.id && (
                             <div className="flex flex-wrap mt-2"> 
                                 {cart.items.map(item => (
-                                    <div key={item.id} className="border p-2 mt-2 rounded-lg mr-2"> 
+                                    <div 
+                                    key={item.id} 
+                                    className="border p-2 mt-2 rounded-lg mr-2 cursor-pointer hover:shadow-lg transition-shadow"
+                                    onClick={() => navigate(`/item/${item.collectible.id}`)} 
+                                > 
                                         <div className="font-bold">{item.collectible.name}</div>
                                         <div>Price: ${item.collectible.price}</div>
                                         <img 
                                             src={item.collectible.images[0]?.img_url} 
                                             alt={item.collectible.name} 
-                                            className="w-24 h-24 object-cover"
+                                            className="w-24 h-24 object-cover rounded-xl"
                                         />
                                     </div>
                                 ))}
