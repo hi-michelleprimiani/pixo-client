@@ -2,6 +2,10 @@
 
 Pixo is an online marketplace for sellers of handmade and curated items. Designed for artisans, crafters and collectors to list and sell their items. By providing a user-friendly and visually appealing marketplace, Pixo aims to empower sellers to reach a broader customer base and showcase their unique creations. 
 
+Slide Presentation of Pixo
+
+https://tome.app/zima-e05/pixo-app-clqwk0f18cstzod64kc9kmk5x
+
 ## Description 
 
 The Pixo App front-end is designed to be user-friendly, providing collectors with an easy-to-navigate interface for browsing, sharing, and managing their collectible items. Built with Javascript, React, Tailwind and Radix, it features responsive design, interactive elements, and seamless integration with the Pixo App back-end services.
