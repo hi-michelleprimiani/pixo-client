@@ -81,19 +81,22 @@ export const EditCollectibleForm = ({ userId }) => {
 
     console.log("Submitting the following data:", updatedData); // Log the data being submitted
 
-    const response = await fetch(
-      `https://clownfish-app-2o2rw.ondigitalocean.app/collectibles/${itemId}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Token ${localStorage.getItem("auth_token")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      }
-    );
-
-    navigate(`/item/${itemId}`);
+    try {
+      const response = await fetch(
+        `https://clownfish-app-2o2rw.ondigitalocean.app/collectibles/${itemId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Token ${localStorage.getItem("auth_token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
+      navigate(`/item/${itemId}`);
+    } catch (error) {
+      navigate(`/item/${itemId}`);
+    }
   };
 
   return (
