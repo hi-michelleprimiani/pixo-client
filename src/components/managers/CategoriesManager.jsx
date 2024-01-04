@@ -1,5 +1,5 @@
 export const getAllCategories = () => {
-  return fetch("http://localhost:8000/categories", {
+  return fetch("http://clownfish-app-2o2rw.ondigitalocean.app/categories", {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,
     },

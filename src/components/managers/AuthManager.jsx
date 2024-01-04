@@ -1,5 +1,5 @@
 export const loginUser = (user) => {
-  return fetch("http://localhost:8000/login", {
+  return fetch("http://clownfish-app-2o2rw.ondigitalocean.app/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -10,7 +10,7 @@ export const loginUser = (user) => {
 };
 
 export const registerUser = (newUser) => {
-  return fetch("http://localhost:8000/register", {
+  return fetch("http://clownfish-app-2o2rw.ondigitalocean.app/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

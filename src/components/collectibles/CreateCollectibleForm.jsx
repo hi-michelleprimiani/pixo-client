@@ -45,7 +45,7 @@ export const CreateCollectibleForm = ({ userId }) => {
   const postCollectible = async (evt) => {
     evt.preventDefault();
 
-    await fetch(`http://localhost:8000/collectibles`, {
+    await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/collectibles`, {
       method: "POST",
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_token")}`,

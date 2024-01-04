@@ -82,7 +82,7 @@ export const EditCollectibleForm = ({ userId }) => {
     console.log("Submitting the following data:", updatedData); // Log the data being submitted
 
     const response = await fetch(
-      `http://localhost:8000/collectibles/${itemId}`,
+      `http://clownfish-app-2o2rw.ondigitalocean.app/collectibles/${itemId}`,
       {
         method: "PUT",
         headers: {

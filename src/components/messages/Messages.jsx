@@ -71,7 +71,7 @@ export const Messages = ({ userId }) => {
     // Function to handle message deletion
     const handleDeleteMessage = async (messageId) => {
       try {
-        const response = await fetch(`http://localhost:8000/messages/${messageId}`, {
+        const response = await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/messages/${messageId}`, {
           method: "DELETE",
           headers: {
             Authorization: `Token ${localStorage.getItem("auth_token")}`,
