@@ -13,7 +13,8 @@ export const Register = ({ setToken, setCurrentUserId }) => {
     lastName: "",
     bio: "",
     location: "",
-    imgurl: "",
+    imgurl:
+      "https://i.pinimg.com/736x/a9/a9/88/a9a98869ff5558d9e853b6d7c34fe500.jpg",
     verifyPassword: "",
   });
 
@@ -60,56 +61,113 @@ export const Register = ({ setToken, setCurrentUserId }) => {
 
   return (
     <main className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <section className="bg-white p-8 rounded-lg shadow-lg w-96">
+      <section className="bg-white p-8 mt-10 rounded-lg shadow-lg w-96">
         <h1 className="text-center text-3xl font-semibold mb-6">
           Create an Account
         </h1>
         <form onSubmit={handleRegister}>
           <div className="mb-4">
             <label className="block text-gray-700">First Name</label>
-            <FormInput type="text" id="firstName" value={formData.firstName} onChange={handleInputChange} required autoFocus/>
+            <FormInput
+              type="text"
+              id="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              required
+              autoFocus
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Last Name</label>
-            <FormInput type="text" id="lastName" value={formData.lastName} onChange={handleInputChange} required />
+            <FormInput
+              type="text"
+              id="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
-            <FormInput type="email" id="email" value={formData.email} onChange={handleInputChange} required />
+            <FormInput
+              type="email"
+              id="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Username</label>
-            <FormInput type="text" id="username" value={formData.username} onChange={handleInputChange} required />
+            <FormInput
+              type="text"
+              id="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
-            <FormInput type="password" id="password" value={formData.password} onChange={handleInputChange} required />
+            <FormInput
+              type="password"
+              id="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Verify Password</label>
-            <FormInput type="password" id="verifyPassword" value={formData.verifyPassword} onChange={handleInputChange} required />
-    {matchUnsuccessful && (
-      <p className="text-red-500 text-center">Password does not match</p>
-    )}
+            <FormInput
+              type="password"
+              id="verifyPassword"
+              value={formData.verifyPassword}
+              onChange={handleInputChange}
+              required
+            />
+            {matchUnsuccessful && (
+              <p className="text-red-500 text-center">
+                Password does not match
+              </p>
+            )}
           </div>
 
           <div className="mb-4 whitespace-pre-wrap">
             <label className="block text-gray-700">
               Tell Us About Yourself
             </label>
-            <FormInput type="textarea" id="bio" value={formData.bio} onChange={handleInputChange} required />
+            <FormInput
+              type="textarea"
+              id="bio"
+              value={formData.bio}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Location</label>
-            <FormInput type="text" id="location" value={formData.location} onChange={handleInputChange} required />
+            <FormInput
+              type="text"
+              id="location"
+              value={formData.location}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Profile Picture</label>
-      <FormInput type="text" id="imgurl" value={formData.imgurl} onChange={handleInputChange} required />
+            <FormInput
+              type="text"
+              id="imgurl"
+              value={formData.imgurl}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <div className="mb-4">
