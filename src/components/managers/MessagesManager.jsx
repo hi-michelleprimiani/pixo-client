@@ -1,5 +1,5 @@
 export const getMessagesByUser = async () => {
-  let url = `http://clownfish-app-2o2rw.ondigitalocean.app/messages`;
+  let url = `https://clownfish-app-2o2rw.ondigitalocean.app/messages`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,
@@ -9,7 +9,7 @@ export const getMessagesByUser = async () => {
 };
 
 export const createMessage = async (newMessage) => {
-  const response = await fetch("http://clownfish-app-2o2rw.ondigitalocean.app/messages", {
+  const response = await fetch("https://clownfish-app-2o2rw.ondigitalocean.app/messages", {
     method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,

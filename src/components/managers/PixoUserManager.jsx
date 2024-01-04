@@ -1,5 +1,5 @@
 export const getPixoUsers = () => {
-  return fetch("http://clownfish-app-2o2rw.ondigitalocean.app/pixouser", {
+  return fetch("https://clownfish-app-2o2rw.ondigitalocean.app/pixouser", {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,
     },
@@ -7,7 +7,7 @@ export const getPixoUsers = () => {
 };
 
 export const getPixoUserAndCollectiblesById = async (userId) => {
-  let url = `http://clownfish-app-2o2rw.ondigitalocean.app/pixouser/${userId}`;
+  let url = `https://clownfish-app-2o2rw.ondigitalocean.app/pixouser/${userId}`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,

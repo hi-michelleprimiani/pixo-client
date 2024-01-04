@@ -1,5 +1,5 @@
 export const getCartByUser = async () => {
-  let url = `http://clownfish-app-2o2rw.ondigitalocean.app/cart`;
+  let url = `https://clownfish-app-2o2rw.ondigitalocean.app/cart`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,
@@ -9,7 +9,7 @@ export const getCartByUser = async () => {
 };
 
 export const getCartItemsByCartId = async (cartId) => {
-  let url = `http://clownfish-app-2o2rw.ondigitalocean.app/cartitems/${cartItemId}`;
+  let url = `https://clownfish-app-2o2rw.ondigitalocean.app/cartitems/${cartItemId}`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,
@@ -20,7 +20,7 @@ export const getCartItemsByCartId = async (cartId) => {
 
 export const deleteCartItem = async (cartItemId) => {
   const response = await fetch(
-    `http://clownfish-app-2o2rw.ondigitalocean.app/cartitems/${cartItemId}`,
+    `https://clownfish-app-2o2rw.ondigitalocean.app/cartitems/${cartItemId}`,
     {
       method: "DELETE",
       headers: {
@@ -35,7 +35,7 @@ export const deleteCartItem = async (cartItemId) => {
 
 
 export const getPaidCart = async () => {
-  let url = `http://clownfish-app-2o2rw.ondigitalocean.app/cart?paid=true`;
+  let url = `https://clownfish-app-2o2rw.ondigitalocean.app/cart?paid=true`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,

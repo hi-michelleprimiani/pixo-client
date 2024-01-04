@@ -28,7 +28,7 @@ export const CollectibleDetails = ( {userId} ) => {
 
   const addItemToCart = async (evt) => {
     evt.preventDefault();
-    await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/cartitems`, {
+    await fetch(`https://clownfish-app-2o2rw.ondigitalocean.app/cartitems`, {
       method: "POST",
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_token")}`,
@@ -51,7 +51,7 @@ export const CollectibleDetails = ( {userId} ) => {
       };
       
       try {
-        const response = await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/messages`, {
+        const response = await fetch(`https://clownfish-app-2o2rw.ondigitalocean.app/messages`, {
           method: "POST",
           headers: {
             Authorization: `Token ${localStorage.getItem("auth_token")}`,

@@ -32,7 +32,7 @@ export const Cart = ( {token, userId}) => {
 const handlePurchaseClick = async () => {
   if (cartId) {
     try {
-      const response = await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/cart/${cartId}`, { 
+      const response = await fetch(`https://clownfish-app-2o2rw.ondigitalocean.app/cart/${cartId}`, { 
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
