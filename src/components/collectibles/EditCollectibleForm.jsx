@@ -82,7 +82,7 @@ export const EditCollectibleForm = ({ userId }) => {
     console.log("Submitting the following data:", updatedData); // Log the data being submitted
 
     const response = await fetch(
-      `http://localhost:8000/collectibles/${itemId}`,
+      `http://clownfish-app-2o2rw.ondigitalocean.app/collectibles/${itemId}`,
       {
         method: "PUT",
         headers: {
@@ -113,14 +113,13 @@ export const EditCollectibleForm = ({ userId }) => {
       <div>
         <Box className="bg-gray-100 min-h-screen flex justify-center items-center">
           <Container className="m-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <h1 className="text-3xl font-bold text-center mb-6">Edit Item</h1>
               <label htmlFor="name" className="label-form">
                 Name
               </label>
               <FormInput
                 id="name"
-                type="text"
                 value={collectibleData?.name}
                 onChange={handleUserInput}
               />
@@ -138,7 +137,6 @@ export const EditCollectibleForm = ({ userId }) => {
               </label>
               <FormInput
                 id="price"
-                type="text"
                 value={collectibleData?.price}
                 onChange={handleUserInput}
               />
@@ -147,7 +145,6 @@ export const EditCollectibleForm = ({ userId }) => {
               </label>
               <FormInput
                 id="material"
-                type="text"
                 value={collectibleData?.material}
                 onChange={handleUserInput}
               />
@@ -156,7 +153,6 @@ export const EditCollectibleForm = ({ userId }) => {
               </label>
               <FormInput
                 id="color"
-                type="text"
                 value={collectibleData?.color}
                 onChange={handleUserInput}
               />
@@ -165,7 +161,6 @@ export const EditCollectibleForm = ({ userId }) => {
               </label>
               <FormInput
                 id="size"
-                type="text"
                 value={collectibleData?.size}
                 onChange={handleUserInput}
               />
@@ -209,7 +204,7 @@ export const EditCollectibleForm = ({ userId }) => {
                   ))}
                 </div>
               </div>
-              <Button type="submit" onClick={handleSubmit}>
+              <Button type="submit">
                 Update Item
               </Button>
             </form>

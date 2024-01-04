@@ -16,19 +16,13 @@ export const CollectiblesList = ({ collectibles }) => {
             }}
           >
             <Inset clip="padding-box" side="top" pb="current">
-              <AspectRatio ratio={2 / 2}>
+              <AspectRatio ratio={1 / 1}>
                 {collectible.images.length > 0 && (
                   <img
-                    src={collectible.images[0].img_url}
-                    alt={collectible.name}
-                    style={{
-                      display: "block",
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "var(--gray-5)",
-                    }}
-                  />
+                  src={collectible.images[0].img_url}
+                  alt={collectible.name}
+                  className="block object-cover w-full h-full"
+                />
                 )}
               </AspectRatio>
             </Inset>

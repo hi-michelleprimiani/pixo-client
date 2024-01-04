@@ -71,7 +71,7 @@ export const Messages = ({ userId }) => {
     // Function to handle message deletion
     const handleDeleteMessage = async (messageId) => {
       try {
-        const response = await fetch(`http://localhost:8000/messages/${messageId}`, {
+        const response = await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/messages/${messageId}`, {
           method: "DELETE",
           headers: {
             Authorization: `Token ${localStorage.getItem("auth_token")}`,
@@ -100,12 +100,12 @@ export const Messages = ({ userId }) => {
       {Object.entries(conversations).map(([conversationKey, conversation]) => (
         <div
           key={conversationKey}
-          className={`w-full max-w-2xl border rounded-lg overflow-hidden my-4 ${
-            selectedConversationKey === conversationKey ? "bg-blue-100" : ""
+          className={`w-full max-w-2xl border rounded-2xl  overflow-hidden my-4 ${
+            selectedConversationKey === conversationKey ? "bg-green/10" : ""
           }`}
         >
           <h3
-            className="text-lg font-semibold bg-blue-100 text-center p-2 rounded-t-lg"
+            className="text-lg font-semibold bg-green/30 text-center p-2 rounded-t-lg"
             onClick={() => handleSelectConversation(conversationKey)}
           >
             Conversation with {conversation.otherUser.user.username}
@@ -120,7 +120,7 @@ export const Messages = ({ userId }) => {
                     : "justify-start"
                 } p-2`}
               >
-                <div className="max-w-2/3 bg-white border border-gray-300 rounded-md px-4 py-2 shadow-sm">
+                <div className="max-w-2/3 bg-white border border-gray-300 rounded-2xl px-4 py-2 shadow-sm">
                   <div className="font-semibold">
                     {message.sender.user.full_name}
                   </div>
@@ -155,12 +155,12 @@ export const Messages = ({ userId }) => {
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
                 />
-                <button
+                <Button
                   className="bg-blue-500 text-white rounded-lg px-4 py-2"
                   onClick={() => handleSendMessage(conversationKey)}
                 >
                   Send
-                </button>
+                </Button>
               </div>
             </div>
           )}

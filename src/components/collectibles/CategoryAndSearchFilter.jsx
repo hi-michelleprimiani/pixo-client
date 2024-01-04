@@ -10,7 +10,7 @@ export const CategoryAndSearchFilter = ({
 }) => {
   return (
     <>
-      <div className="flex justify-between ml-auto mr-auto max-w-screen-lg mb-10">
+      <div className="flex justify-between ml-auto mr-auto max-w-screen-lg mb-8">
         <div className="flex-1">
           <Select.Root 
             size="3"
@@ -31,6 +31,7 @@ export const CategoryAndSearchFilter = ({
               </Select.Group>
             </Select.Content>
           </Select.Root>
+          
         </div>
         {/* Search Bar */}
         <div className="flex-1 text-right"> 
@@ -39,7 +40,7 @@ export const CategoryAndSearchFilter = ({
           placeholder="Search Items"
           value={searchQuery}
           onChange={handleSearchChange}
-          className="px-3 py-2 border border-gray-300 rounded focus:border-green-500 focus:outline-none"
+          className="px-3 py-2 border border-gray-300 rounded-3xl focus:border-green-500 focus:outline-none"
         />
         </div>
       </div>

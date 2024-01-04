@@ -9,7 +9,6 @@ import {
   Flex,
   Inset,
 } from "@radix-ui/themes";
-
 export const Cart = ( {token, userId}) => {
   const [cartData, setCartData] = useState(null);
   const [cartId, setCartId] = useState(null)
@@ -33,7 +32,7 @@ export const Cart = ( {token, userId}) => {
 const handlePurchaseClick = async () => {
   if (cartId) {
     try {
-      const response = await fetch(`http://localhost:8000/cart/${cartId}`, { // Use the cartId from the state
+      const response = await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/cart/${cartId}`, { 
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -71,69 +70,63 @@ const handlePurchaseClick = async () => {
   };
 
   return (
-    <Container className="lg (1024px)">
-      <div className="text-2xl font-bold mb-6">
-        Your Cart Has {cartData?.items?.length} Items
-      </div>
-      {cartData &&
-        cartData.items &&
-        cartData.items.map((item) => (
-          <Card
-            key={item.collectible.id}
-            style={{ maxWidth: 840, maxHeight: 160 }}
-            size={3}
-            className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8"
-            onClick={() => {
-              navigate(`/item/${item.collectible.id}`);
-            }}
-          >
-            <Flex align={"center"}>
-              <div style={{ flexBasis: "18%" }}>
-                <Inset clip="padding-box" side="left" pb="current">
-                  <AspectRatio ratio={1 / 1}>
-                    {item.collectible.images &&
-                      item.collectible.images.length > 0 && (
+    <Container className="lg:container lg:mx-auto px-4">
+      {cartData && cartData.items && cartData.items.length > 0 ? (
+        <>
+          <div className="text-2xl font-bold mb-6">
+            Your Cart Has {cartData.items.length} Items
+          </div>
+          {cartData.items.map((item) => (
+            <Card
+              key={item.collectible.id}
+              className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8" 
+  
+              onClick={() => {
+                navigate(`/item/${item.collectible.id}`);
+              }}
+            >
+              <Flex align="center" className="w-full">
+                <div className="flex-none w-[18%]"> 
+                    <AspectRatio ratio={1 / 1}>
+                      {item.collectible.images && item.collectible.images.length > 0 && (
                         <img
                           src={item.collectible.images[0].img_url}
                           alt={item.collectible.name}
-                          style={{
-                            display: "block",
-                            objectFit: "cover",
-                            width: "100%",
-                            height: "100%",
-                          }}
+                          className="block object-cover w-full h-full rounded-xl" 
                         />
                       )}
-                  </AspectRatio>
-                </Inset>
-              </div>
-              <div style={{ flexBasis: "82%", padding: "20px" }}>
-                <h2 className="text-xl font-bold">{item.collectible.name}</h2>
-                <p>Quantity: {item.quantity}</p>
-                <p>Price: ${item.collectible.price} + Tax ${ (item.collectible.price * item.quantity * 0.04).toFixed(2) }</p>
-                <div className="float-right">
-                  <Button
-                    variant="soft"
-                    color="red"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleDeleteItem(item.id);
-                    }}
-                  >
-                    Remove Item From Cart
-                  </Button>
+                    </AspectRatio>
                 </div>
-              </div>
-            </Flex>
-          </Card>
-        ))}
-        <div>
-        <button onClick={handlePurchaseClick}>Purchase</button>
+                <div className="flex-grow p-5 w-[82%]"> 
+                  <h2 className="text-xl font-bold">{item.collectible.name}</h2>
+                  <p>Price: ${item.collectible.price} + Tax ${ (item.collectible.price * item.quantity * 0.04).toFixed(2) }</p>
+                    <Button
+                      variant="soft"
+                      color="red"
+                      className="absolute bottom-4 right-4"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleDeleteItem(item.id);
+                      }}
+                    >
+                      Remove Item From Cart
+                    </Button>
+                </div>
+              </Flex>
+            </Card>
+          ))}
+          <div className="mb-20">
+            <Button size="3" onClick={handlePurchaseClick}>Purchase</Button>
+            <div className="text-2xl font-bold mb-6 float-right">
+              Total: ${totalPrice.toFixed(2)}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="text-2xl font-bold mb-6">
+          You have no items currently in your cart
         </div>
-      <div className="text-2xl font-bold mb-6 float-right">
-        Total: ${totalPrice.toFixed(2)}{" "}
-      </div>
-
+      )}
     </Container>
   );
-};
+      }  

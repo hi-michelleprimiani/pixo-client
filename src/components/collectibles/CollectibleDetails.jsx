@@ -5,12 +5,11 @@ import { Avatar, Button, Box, Container, Tabs, Text, Flex, TextArea } from "@rad
 import { HeartFilledIcon, AvatarIcon } from "@radix-ui/react-icons";
 import * as Popover from '@radix-ui/react-popover';
 
-export const CollectibleDetails = () => {
+export const CollectibleDetails = ( {userId} ) => {
   const { itemId } = useParams();
   const [chosenCollectible, setChosenCollectible] = useState({});
   const [sellerUserId, setSellerUserId] = useState(null);
-  const loggedInUserId = localStorage.getItem("user_id");
-  const [messageText, setMessageText] = useState(""); // Add this line to manage message text
+  const [messageText, setMessageText] = useState(""); 
   const initialItemState = {
     collectible: itemId,
     quantity: 1,
@@ -24,11 +23,12 @@ export const CollectibleDetails = () => {
     });
   }, [itemId]);
 
-  const isOwnCollectible = sellerUserId == parseInt(loggedInUserId);
+  // To determine whether Add to Cart/Add To Favorites/Message user buttons should be displayed
+  const isOwnCollectible = sellerUserId === parseInt(userId);
 
   const addItemToCart = async (evt) => {
     evt.preventDefault();
-    await fetch(`http://localhost:8000/cartitems`, {
+    await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/cartitems`, {
       method: "POST",
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_token")}`,
@@ -43,17 +43,15 @@ export const CollectibleDetails = () => {
     navigate(`/profile/${chosenCollectible.seller?.id}`);
   };
 
-  
   const handleSendMessage = async () => {
-    if (messageText.trim() !== "") {
       const newMessage = {
-        sender: parseInt(loggedInUserId),
+        sender: parseInt(userId),
         receiver: sellerUserId,
         text: messageText,
       };
-
+      
       try {
-        const response = await fetch(`http://localhost:8000/messages`, {
+        const response = await fetch(`http://clownfish-app-2o2rw.ondigitalocean.app/messages`, {
           method: "POST",
           headers: {
             Authorization: `Token ${localStorage.getItem("auth_token")}`,
@@ -64,12 +62,13 @@ export const CollectibleDetails = () => {
 
         if (response.ok) {
           setMessageText(""); // Clear the message input
+          navigate('/messages')
         } else {
           throw new Error("Failed to send message");
         }
       } catch (error) {
         console.error("Error sending message:", error);
-      }
+      
     }
   };
 
@@ -78,7 +77,7 @@ export const CollectibleDetails = () => {
   return (
     <Container className="lg (1024px)">
       <Box size={2} className="flex justify-between mb-28">
-        <Box className="flex flex-col items-center" style={{ width: "60%" }}>
+        <Box className="flex flex-col items-center w-3/5">
           {chosenCollectible.images &&
             chosenCollectible.images.length > 0 &&
             chosenCollectible.images.map((image) => (
@@ -86,18 +85,11 @@ export const CollectibleDetails = () => {
                 key={image.id}
                 src={image.img_url}
                 alt={chosenCollectible.name}
-                style={{
-                  display: "block",
-                  objectFit: "cover",
-                  width: "60%",
-                  height: "100%",
-                  backgroundColor: "var(--gray-5)",
-                  margin: "10px",
-                }}
+                className="block object-cover w-3/5 h-auto m-2.5 rounded-3xl"
               />
             ))}
         </Box>
-        <Box className="flex flex-col" style={{ width: "40%" }}>
+        <Box className="flex flex-col w-2/5">
           <div className="mb-4">
             <h1 className="text-4xl font-bold mb-4">
               {chosenCollectible.name}
@@ -105,9 +97,10 @@ export const CollectibleDetails = () => {
             <div className="text-3xl font-bold mb-4">
               ${chosenCollectible.price}
             </div>
-            <div className="whitespace-pre-wrap">
-              {chosenCollectible.description}
-            </div>
+            <div className="whitespace-pre-wrap max-h-[700px] overflow-auto">
+            {chosenCollectible.description}
+          </div>
+
           </div>
           <div className="flex items-center mb-4 justify-between">
             <div className="flex items-center">
@@ -124,14 +117,13 @@ export const CollectibleDetails = () => {
             </div>
             {!isOwnCollectible && (
               <div>
-
                 <Popover.Root>
                   <Popover.Trigger>
                     <Button variant="soft">
                       Message Seller
                     </Button>
                   </Popover.Trigger>
-                  <Popover.Content style={{ width: 360, zIndex: 1000, backgroundColor: 'white', padding: 10, border: '1px solid lightgray', borderRadius: '10px', margin: 10 }}>
+                  <Popover.Content className="w-90 z-50 bg-white p-2.5 border border-light-gray rounded-lg m-2.5">
                     <Flex gap="3">
                       <Box grow="1">
                         <Text>Your message to {chosenCollectible.seller?.user?.first_name} at {chosenCollectible.seller?.user?.username}</Text>
@@ -139,14 +131,11 @@ export const CollectibleDetails = () => {
                           placeholder="Write a message..."
                           value={messageText} 
                           onChange={(e) => setMessageText(e.target.value)}
-                          style={{ height: 80 }}
+                          className="h-24 w-80 mb-2"
                           />
-                        <Flex gap="3" mt="3" justify="between">
-                          <Flex align="center" gap="2" asChild></Flex>
                           <Popover.Close>
                             <Button size="1" onClick={handleSendMessage}>Send</Button>
                           </Popover.Close>
-                        </Flex>
                       </Box>
                     </Flex>
                   </Popover.Content>
@@ -166,14 +155,14 @@ export const CollectibleDetails = () => {
               </div>
             </div>
           )}
-          <div className="">
+          <div>
             <Tabs.Root defaultValue="materials">
               <Tabs.List>
                 <Tabs.Trigger value="materials">Materials</Tabs.Trigger>
                 <Tabs.Trigger value="size">Size</Tabs.Trigger>
                 <Tabs.Trigger value="color">Color</Tabs.Trigger>
               </Tabs.List>
-              <Box px="4" pt="3" pb="2">
+              <Box px="3" pt="3" pb="2">
                 <Tabs.Content value="materials">
                   <Text size="3">{chosenCollectible.material}</Text>
                 </Tabs.Content>

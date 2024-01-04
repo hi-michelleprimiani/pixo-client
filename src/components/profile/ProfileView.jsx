@@ -49,7 +49,7 @@ export const ProfileView = () => {
     <>
       <Container>
         <div className="flex justify-center items-center h-full">
-          <Card className="flex mb-20" style={{ maxWidth: 800 }}>
+          <Card className="flex mb-20 max-w-3xl">
             <Flex gap="3" align="center">
               <Avatar
                 size="8"
@@ -69,7 +69,6 @@ export const ProfileView = () => {
                 </Text>
               </Box>
             </Flex>
-            {/*Edit Profile Button*/}
           </Card>
         </div>
 
@@ -149,8 +148,9 @@ export const ProfileView = () => {
         ) : (
           <p>You have not listed any items yet.</p>
       )}
-
+      {userId === loggedInUserId && (
         <PurchaseHistory purchaseHistory={purchaseHistory} />
+      )}
       </Container>
     </>
   );
