@@ -92,9 +92,8 @@ export const EditCollectibleForm = ({ userId }) => {
         body: JSON.stringify(updatedData),
       }
     );
-      navigate(`/item/${itemId}`);
-     
-    }
+
+    navigate(`/item/${itemId}`);
   };
 
   return (
