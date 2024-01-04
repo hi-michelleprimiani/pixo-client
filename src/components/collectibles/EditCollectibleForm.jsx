@@ -93,15 +93,7 @@ export const EditCollectibleForm = ({ userId }) => {
       }
     );
       navigate(`/item/${itemId}`);
-      try {
-        const responseBody = await response.json();
-        console.error("Failed to update collectible:", responseBody);
-      } catch (error) {
-        console.error(
-          "Failed to update collectible, and error parsing the response body:",
-          error
-        );
-      }
+     
     }
   };
 
