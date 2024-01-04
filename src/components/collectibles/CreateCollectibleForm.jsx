@@ -85,11 +85,7 @@ export const CreateCollectibleForm = ({ userId }) => {
             <label htmlFor="name" className="label-form">
               Name
             </label>
-            <FormInput
-              id="name"
-              value={item.name}
-              onChange={handleUserInput}
-            />
+            <FormInput id="name" value={item.name} onChange={handleUserInput} />
             <label htmlFor="description" className="label-form">
               Description
             </label>
@@ -126,11 +122,7 @@ export const CreateCollectibleForm = ({ userId }) => {
             <label htmlFor="size" className="label-form">
               Size
             </label>
-            <FormInput
-              id="size"
-              value={item.size}
-              onChange={handleUserInput}
-            />
+            <FormInput id="size" value={item.size} onChange={handleUserInput} />
             <div className="block text-gray-700 leading-tight">
               <div className="div-form-center">
                 Please Provide Up To Three Image URLS
@@ -170,9 +162,7 @@ export const CreateCollectibleForm = ({ userId }) => {
                 ))}
               </div>
             </div>
-            <Button type="submit">
-              Post Item
-            </Button>
+            <Button type="submit">Post Item</Button>
           </form>
         </Container>
       </Box>

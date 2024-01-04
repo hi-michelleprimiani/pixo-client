@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import { getCollectibleById } from "../managers/CollectibleManager";
 import { useNavigate, useParams } from "react-router-dom";
-import { Avatar, Button, Box, Container, Tabs, Text, Flex, TextArea } from "@radix-ui/themes";
+import {
+  Avatar,
+  Button,
+  Box,
+  Container,
+  Tabs,
+  Text,
+  Flex,
+  TextArea,
+} from "@radix-ui/themes";
 import { HeartFilledIcon, AvatarIcon } from "@radix-ui/react-icons";
-import * as Popover from '@radix-ui/react-popover';
+import * as Popover from "@radix-ui/react-popover";
 
-export const CollectibleDetails = ( {userId} ) => {
+export const CollectibleDetails = ({ userId }) => {
   const { itemId } = useParams();
   const [chosenCollectible, setChosenCollectible] = useState({});
   const [sellerUserId, setSellerUserId] = useState(null);
-  const [messageText, setMessageText] = useState(""); 
+  const [messageText, setMessageText] = useState("");
   const initialItemState = {
     collectible: itemId,
     quantity: 1,
@@ -44,35 +53,35 @@ export const CollectibleDetails = ( {userId} ) => {
   };
 
   const handleSendMessage = async () => {
-      const newMessage = {
-        sender: parseInt(userId),
-        receiver: sellerUserId,
-        text: messageText,
-      };
-      
-      try {
-        const response = await fetch(`https://clownfish-app-2o2rw.ondigitalocean.app/messages`, {
+    const newMessage = {
+      sender: parseInt(userId),
+      receiver: sellerUserId,
+      text: messageText,
+    };
+
+    try {
+      const response = await fetch(
+        `https://clownfish-app-2o2rw.ondigitalocean.app/messages`,
+        {
           method: "POST",
           headers: {
             Authorization: `Token ${localStorage.getItem("auth_token")}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(newMessage),
-        });
-
-        if (response.ok) {
-          setMessageText(""); // Clear the message input
-          navigate('/messages')
-        } else {
-          throw new Error("Failed to send message");
         }
-      } catch (error) {
-        console.error("Error sending message:", error);
-      
+      );
+
+      if (response.ok) {
+        setMessageText(""); // Clear the message input
+        navigate("/messages");
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
     }
   };
-
-
 
   return (
     <Container className="lg (1024px)">
@@ -98,9 +107,8 @@ export const CollectibleDetails = ( {userId} ) => {
               ${chosenCollectible.price}
             </div>
             <div className="whitespace-pre-wrap max-h-[700px] overflow-auto">
-            {chosenCollectible.description}
-          </div>
-
+              {chosenCollectible.description}
+            </div>
           </div>
           <div className="flex items-center mb-4 justify-between">
             <div className="flex items-center">
@@ -110,32 +118,34 @@ export const CollectibleDetails = ( {userId} ) => {
                 src={chosenCollectible.seller?.img_url}
               />
               <div className="ml-2">
-                <p>
-                  {chosenCollectible.seller?.user?.username}
-                </p>
+                <p>{chosenCollectible.seller?.user?.username}</p>
               </div>
             </div>
             {!isOwnCollectible && (
               <div>
                 <Popover.Root>
                   <Popover.Trigger>
-                    <Button variant="soft">
-                      Message Seller
-                    </Button>
+                    <Button variant="soft">Message Seller</Button>
                   </Popover.Trigger>
                   <Popover.Content className="w-90 z-50 bg-white p-2.5 border border-light-gray rounded-lg m-2.5">
                     <Flex gap="3">
                       <Box grow="1">
-                        <Text>Your message to {chosenCollectible.seller?.user?.first_name} at {chosenCollectible.seller?.user?.username}</Text>
+                        <Text>
+                          Your message to{" "}
+                          {chosenCollectible.seller?.user?.first_name} at{" "}
+                          {chosenCollectible.seller?.user?.username}
+                        </Text>
                         <TextArea
                           placeholder="Write a message..."
-                          value={messageText} 
+                          value={messageText}
                           onChange={(e) => setMessageText(e.target.value)}
                           className="h-24 w-80 mb-2"
-                          />
-                          <Popover.Close>
-                            <Button size="1" onClick={handleSendMessage}>Send</Button>
-                          </Popover.Close>
+                        />
+                        <Popover.Close>
+                          <Button size="1" onClick={handleSendMessage}>
+                            Send
+                          </Button>
+                        </Popover.Close>
                       </Box>
                     </Flex>
                   </Popover.Content>

@@ -13,7 +13,7 @@ export const Messages = ({ userId }) => {
     getMessagesByUser().then((data) => {
       const groupedConversations = groupMessagesByConversation(
         data,
-        currentUserID,
+        currentUserID
       );
       setConversations(groupedConversations);
     });
@@ -57,7 +57,7 @@ export const Messages = ({ userId }) => {
         const createdMessage = await response.json();
         const updatedConversations = { ...conversations };
         updatedConversations[selectedConversationKey].messages.push(
-          createdMessage,
+          createdMessage
         );
         setConversations(updatedConversations);
         setMessageInput("");
@@ -67,32 +67,36 @@ export const Messages = ({ userId }) => {
     }
   };
 
-
-    // Function to handle message deletion
-    const handleDeleteMessage = async (messageId) => {
-      try {
-        const response = await fetch(`https://clownfish-app-2o2rw.ondigitalocean.app/messages/${messageId}`, {
+  // Function to handle message deletion
+  const handleDeleteMessage = async (messageId) => {
+    try {
+      const response = await fetch(
+        `https://clownfish-app-2o2rw.ondigitalocean.app/messages/${messageId}`,
+        {
           method: "DELETE",
           headers: {
             Authorization: `Token ${localStorage.getItem("auth_token")}`,
             "Content-Type": "application/json",
           },
-        });
-  
-        if (response.ok) {
-          // Update state to remove the deleted message
-          const updatedConversations = { ...conversations };
-          for (const key in updatedConversations) {
-            updatedConversations[key].messages = updatedConversations[key].messages.filter(msg => msg.id !== messageId);
-          }
-          setConversations(updatedConversations);
-        } else {
-          throw new Error("Failed to delete message");
         }
-      } catch (error) {
-        console.error("Error deleting message:", error);
+      );
+
+      if (response.ok) {
+        // Update state to remove the deleted message
+        const updatedConversations = { ...conversations };
+        for (const key in updatedConversations) {
+          updatedConversations[key].messages = updatedConversations[
+            key
+          ].messages.filter((msg) => msg.id !== messageId);
+        }
+        setConversations(updatedConversations);
+      } else {
+        throw new Error("Failed to delete message");
       }
-    };
+    } catch (error) {
+      console.error("Error deleting message:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center my-4">
@@ -135,7 +139,7 @@ export const Messages = ({ userId }) => {
                         className="text-red-500 text-sm float-right"
                         onClick={() => handleDeleteMessage(message.id)}
                         variant="ghost"
-                        color='red'
+                        color="red"
                       >
                         Delete
                       </Button>

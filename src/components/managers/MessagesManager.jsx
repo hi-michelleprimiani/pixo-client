@@ -9,13 +9,16 @@ export const getMessagesByUser = async () => {
 };
 
 export const createMessage = async (newMessage) => {
-  const response = await fetch("https://clownfish-app-2o2rw.ondigitalocean.app/messages", {
-    method: "POST",
-    headers: {
-      Authorization: `Token ${localStorage.getItem("auth_token")}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newMessage),
-  });
+  const response = await fetch(
+    "https://clownfish-app-2o2rw.ondigitalocean.app/messages",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newMessage),
+    }
+  );
   return response;
 };

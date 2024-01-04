@@ -26,13 +26,11 @@ export const deleteCartItem = async (cartItemId) => {
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_token")}`,
         "Content-Type": "application/json",
-        
       },
-    },
+    }
   );
   return response;
 };
-
 
 export const getPaidCart = async () => {
   let url = `https://clownfish-app-2o2rw.ondigitalocean.app/cart?paid=true`;

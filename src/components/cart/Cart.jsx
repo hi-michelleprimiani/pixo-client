@@ -9,55 +9,57 @@ import {
   Flex,
   Inset,
 } from "@radix-ui/themes";
-export const Cart = ( {token, userId}) => {
+export const Cart = ({ token, userId }) => {
   const [cartData, setCartData] = useState(null);
-  const [cartId, setCartId] = useState(null)
+  const [cartId, setCartId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCartByUser().then(data => {
+    getCartByUser().then((data) => {
       setCartData(data);
-      setCartId(data.id); 
+      setCartId(data.id);
     });
   }, []);
 
+  const totalPrice =
+    cartData?.items?.reduce((total, item) => {
+      const pricePerItem = parseFloat(item.collectible.price);
+      const taxPerItem = pricePerItem * 0.04;
+      const totalCostPerItem = (pricePerItem + taxPerItem) * item.quantity;
+      return total + totalCostPerItem;
+    }, 0) || 0;
 
-  const totalPrice = cartData?.items?.reduce((total, item) => {
-    const pricePerItem = parseFloat(item.collectible.price);
-    const taxPerItem = pricePerItem * 0.04;
-    const totalCostPerItem = (pricePerItem + taxPerItem) * item.quantity;
-    return total + totalCostPerItem;
-  }, 0) || 0;
-  
-const handlePurchaseClick = async () => {
-  if (cartId) {
-    try {
-      const response = await fetch(`https://clownfish-app-2o2rw.ondigitalocean.app/cart/${cartId}`, { 
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${token}`,
-        },
-        body: JSON.stringify({ paid: true }),
-      });
+  const handlePurchaseClick = async () => {
+    if (cartId) {
+      try {
+        const response = await fetch(
+          `https://clownfish-app-2o2rw.ondigitalocean.app/cart/${cartId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Token ${token}`,
+            },
+            body: JSON.stringify({ paid: true }),
+          }
+        );
 
-      if (response.ok) {
-        console.log('Purchase successful');
-        navigate(`/profile/${userId}`);
-        // Handle successful purchase here
-      } else {
-        console.error('Purchase failed', response);
-        // Handle errors here
+        if (response.ok) {
+          console.log("Purchase successful");
+          navigate(`/profile/${userId}`);
+          // Handle successful purchase here
+        } else {
+          console.error("Purchase failed", response);
+          // Handle errors here
+        }
+      } catch (error) {
+        console.error("Network error", error);
+        // Handle network errors here
       }
-    } catch (error) {
-      console.error('Network error', error);
-      // Handle network errors here
+    } else {
+      console.log("No cart ID available");
     }
-  } else {
-    console.log('No cart ID available');
-  }
-};
-
+  };
 
   const handleDeleteItem = async (cartItemId) => {
     try {
@@ -79,44 +81,49 @@ const handlePurchaseClick = async () => {
           {cartData.items.map((item) => (
             <Card
               key={item.collectible.id}
-              className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8" 
-  
+              className="cursor-pointer hover:shadow-lg transition-shadow flex mb-8"
               onClick={() => {
                 navigate(`/item/${item.collectible.id}`);
               }}
             >
               <Flex align="center" className="w-full">
-                <div className="flex-none w-[18%]"> 
-                    <AspectRatio ratio={1 / 1}>
-                      {item.collectible.images && item.collectible.images.length > 0 && (
+                <div className="flex-none w-[18%]">
+                  <AspectRatio ratio={1 / 1}>
+                    {item.collectible.images &&
+                      item.collectible.images.length > 0 && (
                         <img
                           src={item.collectible.images[0].img_url}
                           alt={item.collectible.name}
-                          className="block object-cover w-full h-full rounded-xl" 
+                          className="block object-cover w-full h-full rounded-xl"
                         />
                       )}
-                    </AspectRatio>
+                  </AspectRatio>
                 </div>
-                <div className="flex-grow p-5 w-[82%]"> 
+                <div className="flex-grow p-5 w-[82%]">
                   <h2 className="text-xl font-bold">{item.collectible.name}</h2>
-                  <p>Price: ${item.collectible.price} + Tax ${ (item.collectible.price * item.quantity * 0.04).toFixed(2) }</p>
-                    <Button
-                      variant="soft"
-                      color="red"
-                      className="absolute bottom-4 right-4"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        handleDeleteItem(item.id);
-                      }}
-                    >
-                      Remove Item From Cart
-                    </Button>
+                  <p>
+                    Price: ${item.collectible.price} + Tax $
+                    {(item.collectible.price * item.quantity * 0.04).toFixed(2)}
+                  </p>
+                  <Button
+                    variant="soft"
+                    color="red"
+                    className="absolute bottom-4 right-4"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleDeleteItem(item.id);
+                    }}
+                  >
+                    Remove Item From Cart
+                  </Button>
                 </div>
               </Flex>
             </Card>
           ))}
           <div className="mb-20">
-            <Button size="3" onClick={handlePurchaseClick}>Purchase</Button>
+            <Button size="3" onClick={handlePurchaseClick}>
+              Purchase
+            </Button>
             <div className="text-2xl font-bold mb-6 float-right">
               Total: ${totalPrice.toFixed(2)}
             </div>
@@ -129,4 +136,4 @@ const handlePurchaseClick = async () => {
       )}
     </Container>
   );
-      }  
+};

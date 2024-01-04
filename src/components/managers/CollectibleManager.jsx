@@ -17,24 +17,30 @@ export const getCollectibleById = async (itemId) => {
 };
 
 export const createNewPost = async (newItem) => {
-  const response = await fetch("https://clownfish-app-2o2rw.ondigitalocean.app/collectibles", {
-    method: "POST",
-    headers: {
-      Authorization: `Token ${localStorage.getItem("auth_token")}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newItem),
-  });
+  const response = await fetch(
+    "https://clownfish-app-2o2rw.ondigitalocean.app/collectibles",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    }
+  );
   return response;
 };
 
 export const deleteCollectible = async (itemId) => {
-  const response = await fetch(`https://clownfish-app-2o2rw.ondigitalocean.app/collectibles/${itemId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Token ${localStorage.getItem("auth_token")}`,
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `https://clownfish-app-2o2rw.ondigitalocean.app/collectibles/${itemId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_token")}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return response;
 };

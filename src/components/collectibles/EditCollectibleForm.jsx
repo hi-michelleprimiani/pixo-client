@@ -90,19 +90,16 @@ export const EditCollectibleForm = ({ userId }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
-      },
+      }
     );
-
-    if (response.ok) {
       navigate(`/item/${itemId}`);
-    } else {
       try {
         const responseBody = await response.json();
         console.error("Failed to update collectible:", responseBody);
       } catch (error) {
         console.error(
           "Failed to update collectible, and error parsing the response body:",
-          error,
+          error
         );
       }
     }
@@ -204,9 +201,7 @@ export const EditCollectibleForm = ({ userId }) => {
                   ))}
                 </div>
               </div>
-              <Button type="submit">
-                Update Item
-              </Button>
+              <Button type="submit">Update Item</Button>
             </form>
           </Container>
         </Box>
