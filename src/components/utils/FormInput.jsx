@@ -52,6 +52,20 @@ export const FormInput = ({
           />
         </fieldset>
       );
+    case "password":
+      return (
+        <fieldset className="fieldset">
+          <input
+            id={id}
+            type="password"
+            onChange={onChange}
+            value={value}
+            required
+            autoComplete="off"
+            className="input"
+          />
+        </fieldset>
+      );
     default:
       return (
         <fieldset className="fieldset">
