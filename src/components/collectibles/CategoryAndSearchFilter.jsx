@@ -40,12 +40,14 @@ export const CategoryAndSearchFilter = ({
             className="px-3 py-2 border border-gray-300 rounded-3xl focus:border-green-500 focus:outline-none"
           />
         </div>
-        {filteredCollectibles.length === 0 && searchQuery && (
-          <div className="text-center my-4">
-            <p>No items found for your search.</p>
-          </div>
-        )}
       </div>
+      {filteredCollectibles.length === 0 && searchQuery && (
+        <div className="text-center my-4 font-bold">
+          {" "}
+          {/* Added font-bold for bold text */}
+          <p>No items found for your search.</p>
+        </div>
+      )}
     </>
   );
 };
