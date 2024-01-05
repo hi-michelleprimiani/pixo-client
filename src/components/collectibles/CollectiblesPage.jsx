@@ -11,7 +11,6 @@ export const CollectiblesPage = () => {
   const [filteredCollectibles, setFilteredItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-
   useEffect(() => {
     getAllCollectiblesAndUser().then((data) => {
       const shuffledCollectibles = shuffleArray([...data]);
@@ -26,23 +25,21 @@ export const CollectiblesPage = () => {
     if (selectedCategory !== "all") {
       const selectedCategoryId = parseInt(selectedCategory);
       filtered = filtered.filter((collectible) =>
-        collectible.categories.includes(selectedCategoryId),
+        collectible.categories.includes(selectedCategoryId)
       );
     }
-    // Filter by search query. Checks to see if search query is entered 
+    // Filter by search query. Checks to see if search query is entered
     if (searchQuery) {
       filtered = filtered.filter((collectible) =>
-        collectible.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+        collectible.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
     setFilteredItems(filtered);
   }, [selectedCategory, collectibles, searchQuery]);
 
-
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
-
 
   //? Fisher-Yates Shuffle Algorithm, Knuth Shuffle. Used to randomly shuffle the elements of an array.
   //? the Fisher-Yates Shuffle algorithm iterates over the array from the end to the beginning, swapping each element with another randomly chosen element that comes before it (or could be itself).
@@ -71,6 +68,7 @@ export const CollectiblesPage = () => {
         selectedCategory={selectedCategory}
         searchQuery={searchQuery}
         handleSearchChange={handleSearchChange}
+        filteredCollectibles={filteredCollectibles}
       />
       <CollectiblesList collectibles={filteredCollectibles} />
     </>
