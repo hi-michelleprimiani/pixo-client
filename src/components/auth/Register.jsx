@@ -174,7 +174,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
             <Button className="w-full mb-4">Get Started</Button>
             <Button
               className="w-full"
-              variant="outline"
+              variant="ghost"
               onClick={() => navigate("/login")}
             >
               Back to Login
