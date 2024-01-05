@@ -171,7 +171,7 @@ export const Register = ({ setToken, setCurrentUserId }) => {
           </div>
 
           <div className="mb-4">
-            <Button className="w-full">Get Started</Button>
+            <Button className="w-full mb-4">Get Started</Button>
             <Button
               className="w-full"
               variant="outline"
