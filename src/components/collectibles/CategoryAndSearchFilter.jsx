@@ -44,8 +44,7 @@ export const CategoryAndSearchFilter = ({
       {filteredCollectibles.length === 0 && searchQuery && (
         <div className="text-center my-4 font-bold">
           {" "}
-          {/* Added font-bold for bold text */}
-          <p>No items found for your search.</p>
+          <p>No items found from your search.</p>
         </div>
       )}
     </>
