@@ -121,10 +121,9 @@ export const CollectibleDetails = ({ userId }) => {
                 <p>{chosenCollectible.seller?.user?.username}</p>
               </div>
               {isOwnCollectible && (
-                <div>
+                <div className="ml-auto">
                   <Button
                     variant="soft"
-                    className="float-right"
                     onClick={() => navigate(`/edit/${chosenCollectible.id}`)}
                   >
                     Edit Item
