@@ -172,14 +172,14 @@ export const Register = ({ setToken, setCurrentUserId }) => {
 
           <div className="mb-4">
             <Button className="w-full mb-4">Get Started</Button>
-            <Button
-              className="w-full"
-              variant="ghost"
-              onClick={() => navigate("/login")}
-            >
-              Back to Login
-            </Button>
           </div>
+          <Button
+            className="w-full"
+            variant="ghost"
+            onClick={() => navigate("/login")}
+          >
+            Back to Login
+          </Button>
         </form>
       </section>
     </main>
