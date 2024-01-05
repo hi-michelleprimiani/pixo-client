@@ -120,12 +120,17 @@ export const CollectibleDetails = ({ userId }) => {
               <div className="ml-2">
                 <p>{chosenCollectible.seller?.user?.username}</p>
               </div>
-              <Button
-                variant="soft"
-                onClick={() => navigate(`/edit/${chosenCollectible.id}`)}
-              >
-                Edit Item
-              </Button>
+              {isOwnCollectible && (
+                <div>
+                  <Button
+                    variant="soft"
+                    className="float-right"
+                    onClick={() => navigate(`/edit/${chosenCollectible.id}`)}
+                  >
+                    Edit Item
+                  </Button>
+                </div>
+              )}
             </div>
             {!isOwnCollectible && (
               <div>
