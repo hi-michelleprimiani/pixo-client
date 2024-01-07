@@ -21,7 +21,7 @@ import { getPaidCart } from "../managers/CartManager";
 import { PurchaseHistory } from "./PurchaseHistory";
 
 export const ProfileView = () => {
-    const { userId } = useParams();
+  const { userId } = useParams();
   const [getUser, setUser] = useState([]);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
   const navigate = useNavigate();
@@ -31,7 +31,6 @@ export const ProfileView = () => {
     getPixoUserAndCollectiblesById(userId).then(setUser);
     getPaidCart().then(setPurchaseHistory);
   }, [userId]);
-  
 
   const handleDeleteCollectible = async (itemId) => {
     try {
@@ -49,7 +48,7 @@ export const ProfileView = () => {
     <>
       <Container>
         <div className="flex justify-center items-center h-full">
-          <Card className="flex mb-20 max-w-3xl">
+          <Card className="flex mb-20 max-w-4xl">
             <Flex gap="3" align="center">
               <Avatar
                 size="8"
@@ -74,83 +73,83 @@ export const ProfileView = () => {
 
         <div className="text-xl font-bold mb-3">Current Listed Items</div>
         {getUser.collectible && getUser.collectible.length > 0 ? (
-        <Grid columns="4" gap="4" width="auto">
-          {getUser.collectible?.map((item) => (
-            <Card
-              key={item.id}
-              className="cursor-pointer hover:shadow-lg transition-shadow"
-            >
-              <Inset clip="padding-box" side="top" pb="current">
-                <AspectRatio ratio={1 / 1}>
-                  {item.images.length > 0 && (
-                    <img
-                      src={item.images[0].img_url}
-                      onClick={() => navigate(`/item/${item.id}`)}
-                      alt={item.name}
-                      style={{
-                        display: "block",
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                  )}
-                </AspectRatio>
-              </Inset>
-              <div className="text-xl font-bold">{item.name}</div>
-              <p className="text-gray-600">${item.price}</p>
-              {userId === loggedInUserId && (
-                <div className="mt-2">
-                  <Button
-                    variant="soft"
-                    onClick={() => navigate(`/edit/${item.id}`)}
-                  >
-                    Edit
-                  </Button>
-                  <AlertDialog.Root>
-                    <AlertDialog.Trigger>
-                      <Button
-                        className="float-right"
-                        variant="soft"
-                        color="red"
-                      >
-                        Delete
-                      </Button>
-                    </AlertDialog.Trigger>
-                    <AlertDialog.Content style={{ maxWidth: 450 }}>
-                      <AlertDialog.Title>Delete Item</AlertDialog.Title>
-                      <AlertDialog.Description size="2">
-                        Are you sure? This action cannot be undone.
-                      </AlertDialog.Description>
-                      <Flex gap="3" mt="4" justify="end">
-                        <AlertDialog.Cancel>
-                          <Button variant="soft" color="gray">
-                            Cancel
-                          </Button>
-                        </AlertDialog.Cancel>
-                        <AlertDialog.Action>
-                          <Button
-                            variant="solid"
-                            color="red"
-                            onClick={() => handleDeleteCollectible(item.id)}
-                          >
-                            Delete
-                          </Button>
-                        </AlertDialog.Action>
-                      </Flex>
-                    </AlertDialog.Content>
-                  </AlertDialog.Root>
-                </div>
-              )}
-            </Card>
-          ))}
-        </Grid>
+          <Grid columns="4" gap="4" width="auto">
+            {getUser.collectible?.map((item) => (
+              <Card
+                key={item.id}
+                className="cursor-pointer hover:shadow-lg transition-shadow"
+              >
+                <Inset clip="padding-box" side="top" pb="current">
+                  <AspectRatio ratio={1 / 1}>
+                    {item.images.length > 0 && (
+                      <img
+                        src={item.images[0].img_url}
+                        onClick={() => navigate(`/item/${item.id}`)}
+                        alt={item.name}
+                        style={{
+                          display: "block",
+                          objectFit: "cover",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      />
+                    )}
+                  </AspectRatio>
+                </Inset>
+                <div className="text-xl font-bold">{item.name}</div>
+                <p className="text-gray-600">${item.price}</p>
+                {userId === loggedInUserId && (
+                  <div className="mt-2">
+                    <Button
+                      variant="soft"
+                      onClick={() => navigate(`/edit/${item.id}`)}
+                    >
+                      Edit
+                    </Button>
+                    <AlertDialog.Root>
+                      <AlertDialog.Trigger>
+                        <Button
+                          className="float-right"
+                          variant="soft"
+                          color="red"
+                        >
+                          Delete
+                        </Button>
+                      </AlertDialog.Trigger>
+                      <AlertDialog.Content style={{ maxWidth: 450 }}>
+                        <AlertDialog.Title>Delete Item</AlertDialog.Title>
+                        <AlertDialog.Description size="2">
+                          Are you sure? This action cannot be undone.
+                        </AlertDialog.Description>
+                        <Flex gap="3" mt="4" justify="end">
+                          <AlertDialog.Cancel>
+                            <Button variant="soft" color="gray">
+                              Cancel
+                            </Button>
+                          </AlertDialog.Cancel>
+                          <AlertDialog.Action>
+                            <Button
+                              variant="solid"
+                              color="red"
+                              onClick={() => handleDeleteCollectible(item.id)}
+                            >
+                              Delete
+                            </Button>
+                          </AlertDialog.Action>
+                        </Flex>
+                      </AlertDialog.Content>
+                    </AlertDialog.Root>
+                  </div>
+                )}
+              </Card>
+            ))}
+          </Grid>
         ) : (
           <p>You have not listed any items yet.</p>
-      )}
-      {userId === loggedInUserId && (
-        <PurchaseHistory purchaseHistory={purchaseHistory} />
-      )}
+        )}
+        {userId === loggedInUserId && (
+          <PurchaseHistory purchaseHistory={purchaseHistory} />
+        )}
       </Container>
     </>
   );
