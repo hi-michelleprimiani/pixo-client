@@ -45,16 +45,15 @@ export const Cart = ({ token, userId }) => {
         );
 
         if (response.ok) {
-          console.log("Purchase successful");
+          alert(
+            "Your purchase was complete. You can now view your order in your Purchase History"
+          );
           navigate(`/profile/${userId}`);
-          // Handle successful purchase here
         } else {
           console.error("Purchase failed", response);
-          // Handle errors here
         }
       } catch (error) {
         console.error("Network error", error);
-        // Handle network errors here
       }
     } else {
       console.log("No cart ID available");
