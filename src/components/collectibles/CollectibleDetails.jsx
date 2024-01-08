@@ -165,8 +165,12 @@ export const CollectibleDetails = ({ userId }) => {
           </div>
 
           {!isOwnCollectible && (
-            <div className="mb-2 text-center flex flex-row justify-center">
-              <Button onClick={addItemToCart}>Add To Cart</Button>
+            <div className="mb-2 text-center flex flex-row">
+              <div className="w-full">
+                <Button onClick={addItemToCart} className="w-full">
+                  Add To Cart
+                </Button>
+              </div>
               {/* <div className="ml-5">
                 <Button>
                   <HeartFilledIcon />
